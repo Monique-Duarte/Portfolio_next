@@ -2,6 +2,7 @@
 
 import React, { useState, KeyboardEvent } from "react";
 import Image from "next/image";
+import './flip-animations.css';
 
 const IMG_FRONT_PATH = "/images/frente.jpeg";
 const IMG_BACK_PATH = "/images/verso.jpeg";
@@ -52,6 +53,17 @@ const FlipCard: React.FC<FlipCardProps> = ({ front, back }) => {
             MozBackfaceVisibility: "hidden"
           }}
         >
+          {/* Folha dobrada animada, canto inferior direito, animação sutil */}
+          <span
+            className="absolute bottom-0 right-0 w-10 h-10 bg-yellow-300 shadow-lg z-20 slow-bounce"
+            style={{
+              clipPath: "polygon(100% 100%, 0 100%, 100% 0)",
+              borderTopLeftRadius: '0.75rem',
+              borderBottomRightRadius: '0.75rem',
+              border: '2px solid #facc15',
+            }}
+            aria-hidden="true"
+          />
           <Image
             src={front}
             alt="Foto de perfil frente"

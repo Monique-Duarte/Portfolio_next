@@ -1,0 +1,8 @@
+@keyframes slow-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.slow-bounce {
+  animation: slow-bounce 1.5s cubic-bezier(0.4,0,0.2,1) infinite;
+} 
