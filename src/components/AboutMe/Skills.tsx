@@ -79,9 +79,9 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
       <svg viewBox="0 0 1440 100" className="w-full h-[60px] -mb-2 scale-x-[-1] mt-[-20]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <path className="ondulacao-detalhe" d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z" />
       </svg>
-      <div className="relative z-10 w-[90vw] lg:w-[80vw] mx-auto py-2 px-4 rounded-xl p-4 ">
-        <h2 className="text-3xl font-bold text-center mb-16 text-theme-font flex items-center justify-center gap-4">
-          <span className="section-title">{t("meusConhecimentos")}</span>
+      <div className="relative z-10 w-[90vw] lg:w-[80vw] mx-auto my-10 rounded-xl p-4 ">
+        <h2 className="text-3xl font-bold text-center text-theme-font flex items-center justify-center gap-4">
+          <span className="section-title mb-15">{t("meusConhecimentos")}</span>
           {modoLista && (
             <span className="ml-4 text-2xl font-bold text-yellow-500 drop-shadow section-title">Destaque</span>
           )}

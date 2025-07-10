@@ -5,6 +5,7 @@ import Footer from '../components/Footer/Footer';
 import I18nProvider from '../components/I18nProvider/I18nProvider';
 import { ThemeProvider } from '../components/ThemeProvider/ThemeProvider';
 import { ReactNode } from 'react';
+import BackgroundLines from '../components/BackgroundLines';
 
 export const metadata = {
   title: {
@@ -48,6 +49,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
       <body className={`font-comfortaa bg-[#FFEDBF] min-h-screen overflow-visible`}>
+        <BackgroundLines />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <I18nProvider>
             <header className="w-full bg-gradient-to-r from-[#FFE08C] to-[#FFEDBF] shadow-md">

@@ -150,3 +150,10 @@ svg .ondulacao-detalhe {
 .section-title:hover::after {
   width: 100%;
 }
+.background-lines-svg {
+  opacity: 0.18;
+  transition: opacity 0.3s;
+}
+.dark .background-lines-svg {
+  opacity: 0.08;
+}
