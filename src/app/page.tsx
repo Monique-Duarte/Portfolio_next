@@ -45,7 +45,7 @@ export default function Page() {
 
   return (
     <main className="bg-theme-background text-theme-font min-h-screen transition-all duration-700 w-full overflow-visible">
-      <div className="w-full min-h-screen flex flex-col justify-center items-center px-4 md:px-0 max-w-6xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto px-4 md:px-0">
         <AboutMe />
       </div>
       {/* Habilidades centralizadas sempre */}

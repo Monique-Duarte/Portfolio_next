@@ -3,6 +3,7 @@ import projectsData from '../Cards/Cards';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from "next/image";
+import ModalButton from './ModalButton';
 
 interface Project {
   id: string;
@@ -73,11 +74,11 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
                   </div>
                 </div>
                 <button
-                  className="absolute z-30 left-1/2 bottom-6 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 px-5 py-2 rounded-lg bg-yellow-400 text-theme-font font-bold shadow hover:bg-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-offset-2 cursor-pointer"
+                  className="absolute z-30 left-1/2 bottom-6 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500"
                   onClick={() => setModalProjeto(project)}
                   tabIndex={-1}
                 >
-                  Ver mais
+                  <ModalButton className="px-5 py-2 rounded-lg w-full">Ver mais</ModalButton>
                 </button>
               </motion.div>
             ))}
@@ -137,13 +138,13 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
               </div>
               <div className="flex gap-4">
                 {modalProjeto.siteLink && modalProjeto.siteLink.trim() !== '' && (
-                  <a href={modalProjeto.siteLink} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded bg-yellow-400 text-theme-font font-bold hover:bg-yellow-500 transition">SITE</a>
+                  <ModalButton href={modalProjeto.siteLink}>SITE</ModalButton>
                 )}
                 {modalProjeto.githubLink && modalProjeto.githubLink.trim() !== '' && (
-                  <a href={modalProjeto.githubLink} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded bg-yellow-400 text-theme-font font-bold hover:bg-yellow-500 transition">GITHUB</a>
+                  <ModalButton href={modalProjeto.githubLink}>GITHUB</ModalButton>
                 )}
                 {modalProjeto.linkedin && modalProjeto.linkedin.trim() !== '' && (
-                  <a href={modalProjeto.linkedin} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded bg-yellow-400 text-theme-font dark:text-zinc-900 font-bold shadow hover:bg-yellow-500 transition">Post LinkedIn</a>
+                  <ModalButton href={modalProjeto.linkedin}>Post LinkedIn</ModalButton>
                 )}
               </div>
             </div>

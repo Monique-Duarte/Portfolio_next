@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Typewriter } from 'react-simple-typewriter';
 import { useTranslation } from "react-i18next";
 import CardContainer from "../Flip/Flip";
-import AboutTabs from "./AboutTabs";
+import { AboutTabsTabs, AboutTabsContent } from "./AboutTabs";
 
 const WelcomeMessage = () => {
   const { t } = useTranslation();
@@ -20,11 +20,11 @@ const WelcomeMessage = () => {
 
   return (
     <div
-      className={`transition-all duration-500 flex justify-center w-full mb-8 ${
+      className={`transition-all duration-500 flex justify-center w-full ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-8 pointer-events-none"
       }`}
     >
-      <h2 className="text-2xl md:text-3xl font-bold text-theme-font dark:text-white text-center drop-shadow">
+      <h2 className="text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-bold text-theme-font dark:text-white text-center drop-shadow">
         <Typewriter
           words={[t('welcome')]}
           loop={1}
@@ -40,15 +40,22 @@ const WelcomeMessage = () => {
 };
 
 const AboutMe = () => {
+  const [activeTab, setActiveTab] = useState('quem');
   return (
-    <section className="w-full overflow-hidden bg-theme-background text-theme-font mt-[-80px]">
-      <div className="w-[90vw] lg:w-[80vw] mx-auto px-4">
-        <WelcomeMessage />
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-16 w-full">
+    <section className="w-full overflow-hidden bg-theme-background text-theme-font mt-[-80px] min-h-[90vh] pt-8">
+      <div className="w-full max-w-[90vw] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <div className="col-span-1 lg:col-span-3 flex justify-center sm:my-10">
+          <WelcomeMessage />
+        </div>
+        <div className="flex justify-center sm:my-10 xl:my-20">
           <CardContainer />
-          <div className="flex-1 w-full max-w-[90vw] md:max-w-full mx-auto px-2 md:px-0">
-            <AboutTabs />
-          </div>
+        </div>
+        <div className="flex sm:my-15 xl:my-25 flex-col gap-4 items-center text-base md:text-lg lg:text-xl xl:text-2xl">
+          <AboutTabsTabs active={activeTab} setActive={setActiveTab} />
+        </div>
+        {/* Resposta (AboutTabsContent) */}
+        <div className="flex sm:my-10 xl:my-20 items-center justify-center text-base md:text-lg lg:text-xl xl:text-2xl">
+          <AboutTabsContent active={activeTab} />
         </div>
       </div>
     </section>
