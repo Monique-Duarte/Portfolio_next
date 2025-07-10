@@ -8,6 +8,7 @@ const projectsData = [
     siteLink: "https://portfolio-moniquead-dev.vercel.app/",
     githubLink: "https://github.com/Monique-Duarte/Portfolio_next",
     descKey: "projects.portfolioNextDesc",
+    linkedin: "https://www.linkedin.com/posts/moniquead_hoje-compartilho-com-orgulho-meu-primeiro-activity-7349090985047404544-pIEG?utm_source=share&utm_medium=member_desktop&rcm=ACoAABVZ3B0B3wsq2HZON99hwOtCO_Nc15likh8",
   },
   {
     titleKey: "projects.techzoow",
@@ -18,6 +19,7 @@ const projectsData = [
     siteLink: "https://www.techzoow.com.br/",
     githubLink: "",
     descKey: "projects.techzoowDesc",
+    linkedin: "https://www.linkedin.com/posts/moniquead_%F0%9D%90%8F%F0%9D%90%AB%F0%9D%90%A2%F0%9D%90%A6%F0%9D%90%9E%F0%9D%90%A2%F0%9D%90%AB%F0%9D%90%A8-%F0%9D%90%A9%F0%9D%90%AB%F0%9D%90%A8%F0%9D%90%A3%F0%9D%90%9E%F0%9D%90%AD%F0%9D%90%A8-%F0%9D%90%9C%F0%9D%90%A8%F0%9D%90%A6%F0%9D%90%A8-activity-7348335651039129600-wwLx?utm_source=share&utm_medium=member_desktop&rcm=ACoAABVZ3B0B3wsq2HZON99hwOtCO_Nc15likh8",
   },
   {
     titleKey: "projects.portfolio",
@@ -28,6 +30,7 @@ const projectsData = [
     siteLink: "https://portfolio-moniquead.vercel.app/",
     githubLink: "https://github.com/Monique-Duarte/Portfolio_2025.git",
     descKey: "projects.portfolioDesc",
+    linkedin: "https://www.linkedin.com/posts/moniquead_desenvolvimentoweb-frontend-reactjs-activity-7339029070501797888-9JfD?utm_source=share&utm_medium=member_desktop&rcm=ACoAABVZ3B0B3wsq2HZON99hwOtCO_Nc15likh8",
   },
   {
     titleKey: "projects.aura",
@@ -38,6 +41,7 @@ const projectsData = [
     siteLink: "",
     githubLink: "https://github.com/Monique-Duarte/Aura",
     descKey: "projects.auraDesc",
+    linkedin: "https://www.linkedin.com/posts/moniquead_desenvolvimentoweb-ionicreact-firebase-activity-7334313510337662976-Lh96?utm_source=share&utm_medium=member_desktop&rcm=ACoAABVZ3B0B3wsq2HZON99hwOtCO_Nc15likh8",
   },
   {
     titleKey: "projects.disneyCopy",
@@ -51,7 +55,7 @@ const projectsData = [
   },
   {
     titleKey: "projects.movieLandingPage",
-    imgSrc: "/images/project/dragon.jpeg",
+    imgSrc: "/images/project/dragon.png",
     altKey: "projects.movieLandingPageAlt",
     tags: "Css, JavaScripts, Gulp",
     id: "movie-landing-page",
@@ -61,7 +65,7 @@ const projectsData = [
   },
   {
     titleKey: "projects.hemaToma",
-    imgSrc: "/images/project/game.jpg",
+    imgSrc: "/images/project/game.png",
     altKey: "projects.hemaTomaAlt",
     tags: "bootstrap, JavaScript, CSS",
     id: "hema-toma",

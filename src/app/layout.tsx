@@ -54,9 +54,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Header />
             </header>
             {/* Divisor SVG ondulado entre header e conteúdo principal */}
-            <div className="w-full -mb-1 bg-transparent">
-              <svg viewBox="0 0 1440 200" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full block h-[200px]" style={{height: '200px', display: 'block'}}>
-                <path className="ondulacao-detalhe" d="M0,0 C480,200 960,0 1440,200 L1440,0 L0,0 Z" />
+            <div className="w-full overflow-hidden -mt-1">
+              <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-46 sm:h-[130px] lg:h-[15hv]">
+                <path className="ondulacao-detalhe" d="M0,60 C480,0 960,60 1440,0 L1440,60 L0,60 Z" transform="scale(1,-1) translate(0,-60)" />
               </svg>
             </div>
             {/* Conteúdo principal (AboutMe, Skills, Projects) */}
@@ -69,7 +69,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 <path className="ondulacao-detalhe" d="M0,60 C480,0 960,60 1440,0 L1440,60 L0,60 Z" />
               </svg>
             </div>
-            {/* Footer com gradiente azul para amarelo claro */}
             <footer className="w-full bg-gradient-to-r from-[#A7D9ED] to-[#FFEDBF]">
               <Footer />
             </footer>

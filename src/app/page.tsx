@@ -45,7 +45,7 @@ export default function Page() {
 
   return (
     <main className="bg-theme-background text-theme-font min-h-screen transition-all duration-700 w-full overflow-visible">
-      <div className="w-full">
+      <div className="w-full min-h-screen flex flex-col justify-center items-center px-4 md:px-0 max-w-6xl mx-auto">
         <AboutMe />
       </div>
       {/* Habilidades centralizadas sempre */}
@@ -63,8 +63,8 @@ export default function Page() {
             <h2 className="text-3xl font-bold text-theme-font drop-shadow text-center">
               <span className="section-title">
                 {techSelecionadaNome && techSelecionadaNome.length > 0
-                  ? `Projetos — ${techSelecionadaNome.charAt(0).toUpperCase() + techSelecionadaNome.slice(1)}`
-                  : 'Projetos'}
+                  ? `Destaques — ${techSelecionadaNome.charAt(0).toUpperCase() + techSelecionadaNome.slice(1)}`
+                  : 'Destaques'}
               </span>
             </h2>
             {techSelecionada && (

@@ -13,6 +13,7 @@ interface Project {
   tags?: string;
   siteLink?: string;
   githubLink?: string;
+  linkedin?: string;
 }
 
 interface ProjectsProps {
@@ -22,12 +23,19 @@ interface ProjectsProps {
 const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
   const { t } = useTranslation();
   const [modalProjeto, setModalProjeto] = useState<Project | null>(null);
-  const filteredProjects = techFilter
-    ? (projectsData as Project[]).filter((project) => {
+  const [showDemais, setShowDemais] = useState(false);
+  // Separar os projetos em destaques e demais
+  const restaurantIdx = (projectsData as Project[]).findIndex(p => p.id === 'restaurant');
+  const destaques = (projectsData as Project[]).slice(0, restaurantIdx + 1);
+  const demais = (projectsData as Project[]).slice(restaurantIdx + 1);
+
+  // Filtro só afeta os destaques
+  const filteredDestaques = techFilter
+    ? destaques.filter((project) => {
         if (!project.tags) return false;
         return project.tags.split(',').map(tag => tag.trim().toLowerCase()).includes((techFilter || '').toLowerCase());
       })
-    : (projectsData as Project[]);
+    : destaques;
 
   const theme = typeof window !== 'undefined' && document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 
@@ -38,21 +46,22 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
       aria-label={t("projects.sectionAriaLabel")}
     >
       <div className="relative mx-auto w-full max-w-6xl z-10 flex flex-col items-center justify-center">
-        <div className="flex flex-wrap gap-8 justify-center mb-20 w-full items-start overflow-visible px-8 py-8">
+        {/* Destaques - grid responsivo, box largo */}
+        <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 justify-center mb-20 items-start overflow-visible px-8 py-8">
           <AnimatePresence mode="wait">
-            {filteredProjects.map((project, idx) => (
+            {filteredDestaques.map((project, idx) => (
               <motion.div
                 key={project.id}
                 initial={{ opacity: 0, x: -60 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 60 }}
                 transition={{ duration: 0.5, delay: idx * 0.09, ease: [0.4, 0, 0.2, 1] }}
-                className="relative group rounded-2xl overflow-hidden shadow-xl border border-theme-font/20 bg-theme-background/80 transition-transform duration-500 hover:scale-120 hover:z-50 w-[320px] h-[340px] flex flex-col justify-end cursor-pointer"
+                className="relative group rounded-2xl overflow-hidden shadow-xl border border-theme-font/20 bg-theme-background/80 transition-transform duration-500 hover:scale-105 hover:z-50 w-full min-h-[340px] h-[360px] flex flex-col justify-end cursor-pointer"
               >
                 <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${project.imgSrc})` }} />
                 <div className="absolute inset-0 bg-black/70 group-hover:bg-black/10 transition-all duration-500 z-10" />
                 <div className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full px-4 transition-all duration-500 group-hover:opacity-0 group-hover:scale-95">
-                  <h3 className="text-2xl font-extrabold text-white text-center whitespace-nowrap drop-shadow-lg mb-3" style={{textShadow: '0 2px 8px #000, 0 1px 0 #fff'}}>
+                  <h3 className="text-2xl font-extrabold text-white text-center whitespace-nowrap drop-shadow-lg mb-3 section-title" style={{textShadow: '0 2px 8px #000, 0 1px 0 #fff'}}>
                     {t(project.titleKey)}
                   </h3>
                   <div className="flex flex-wrap gap-2 justify-center w-full">
@@ -74,6 +83,37 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
             ))}
           </AnimatePresence>
         </div>
+        {/* Demais projetos - Accordion */}
+        <button
+          className="text-3xl font-extrabold mb-8 mt-8 text-center section-title relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-yellow-400 after:mx-auto after:mt-2 focus:outline-none transition-colors duration-300 flex items-center justify-center gap-2"
+          style={{ outline: 'none' }}
+          onClick={() => setShowDemais((prev) => !prev)}
+          aria-expanded={showDemais}
+        >
+          Demais projetos
+          <span className={`transition-transform duration-300 ${showDemais ? 'rotate-180' : ''} flex items-center`} style={{lineHeight:0}}>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" className="inline align-middle">
+              <path d="M6 8L10 12L14 8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
+        </button>
+        {showDemais && (
+          <ul className="w-full max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mb-16 animate-fade-in">
+            {demais.map((project) => (
+              <li key={project.id} className="flex justify-center">
+                <button
+                  className="relative text-lg font-bold text-theme-font section-title transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center group"
+                  style={{ textDecoration: 'none' }}
+                  onClick={() => setModalProjeto(project)}
+                >
+                  {t(project.titleKey)}
+                  <span className="block h-1 w-0 group-hover:w-full transition-all duration-300 bg-yellow-400 mx-auto mt-1"></span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+        {/* Modal */}
         {modalProjeto && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setModalProjeto(null)}>
             <div
@@ -101,6 +141,9 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
                 )}
                 {modalProjeto.githubLink && modalProjeto.githubLink.trim() !== '' && (
                   <a href={modalProjeto.githubLink} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded bg-yellow-400 text-theme-font font-bold hover:bg-yellow-500 transition">GITHUB</a>
+                )}
+                {modalProjeto.linkedin && modalProjeto.linkedin.trim() !== '' && (
+                  <a href={modalProjeto.linkedin} target="_blank" rel="noopener noreferrer" className="px-4 py-2 rounded bg-yellow-400 text-theme-font dark:text-zinc-900 font-bold shadow hover:bg-yellow-500 transition">Post LinkedIn</a>
                 )}
               </div>
             </div>

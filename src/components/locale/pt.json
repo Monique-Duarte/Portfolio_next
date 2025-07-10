@@ -21,7 +21,7 @@
       "qualtrajetoria": "Minha trajetória",
       "trajetoria": "Sou formada em Zootecnia, tenho um mestrado em Ciências pela USP. No entanto, minha paixão pela tecnologia me levou a buscar novas oportunidades e desafios. Em 2024, iniciei meus estudos como desenvolvdora FullStack, através da EBAC. Em 2025, iniciei a Pós-graduação em Engenharia de Software pela PUC Minas, onde aprendi habilidades essenciais para o desenvolvimento de software de alta qualidade. Atualmente, estou em busca de uma oportunidade como desenvolvedora, onde posso aplicar meus conhecimentos e continuar crescendo profissionalmente."
     },
-    "projetos": "Projetos",
+    "projetos": "Destaques",
     "lista_projetos": "Lista de Projetos",
     "buscarTecnologia": "Buscar por Tecnologia",
     "meusConhecimentos": "Habilidades",
@@ -108,7 +108,7 @@
       "home": "Início",
       "aboutMe": "Sobre",
       "skills": "Habilidades",
-      "projects": "Projetos",
+      "projects": "Destaques",
       "contact": "Contato"
     },
     "contact": {
