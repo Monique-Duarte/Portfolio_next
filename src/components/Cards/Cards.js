@@ -5,7 +5,7 @@ const projectsData = [
     altKey: "projects.portfolioNextAlt",
     tags: "Next.js, Tailwind, Framer Motion, TypeScript, i18n",
     id: "portfolio-next",
-    siteLink: "https://portfolio-dev-green.vercel.app/",
+    siteLink: "https://portfolio-moniquead-dev.vercel.app/",
     githubLink: "https://github.com/Monique-Duarte/Portfolio_next",
     descKey: "projects.portfolioNextDesc",
   },

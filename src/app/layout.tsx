@@ -16,11 +16,11 @@ export const metadata = {
   openGraph: {
     title: 'Monique Duarte | Portfólio',
     description: 'Portfólio moderno de Monique Duarte, desenvolvedora apaixonada por tecnologia, automação, IA e inovação.',
-    url: 'https://seu-dominio.com',
+    url: 'https://portfolio-moniquead-dev.vercel.app/',
     siteName: 'Monique Duarte | Portfólio',
     images: [
       {
-        url: '/images/monique1.png',
+        url: '/images/favicon.svg',
         width: 800,
         height: 600,
         alt: 'Monique Duarte',
@@ -33,17 +33,20 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Monique Duarte | Portfólio',
     description: 'Portfólio moderno de Monique Duarte, desenvolvedora apaixonada por tecnologia, automação, IA e inovação.',
-    images: ['/images/monique1.png'],
+    images: ['/images/favicon.svg'],
     creator: '@seu_twitter',
   },
   alternates: {
-    canonical: 'https://seu-dominio.com',
+    canonical: 'https://portfolio-moniquead-dev.vercel.app/',
   },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-br" suppressHydrationWarning style={{ overflow: 'visible' }}>
+      <head>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+      </head>
       <body className={`font-comfortaa bg-[#FFEDBF] min-h-screen overflow-visible`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <I18nProvider>
