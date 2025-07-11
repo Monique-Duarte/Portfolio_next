@@ -38,6 +38,7 @@
   --color-rgb-b: 119;
   --color-shadow-light: var(--color-accent-light);
   --color-shadow-dark: var(--color-accent-dark);
+  --color-seta-contraste: var(--color-font-primary); /* cor do título no light */
 }
 
 /* Modo DARK */
@@ -57,6 +58,7 @@
   --color-rgb-b: 65;
   --color-shadow-light: var(--color-accent-light);
   --color-shadow-dark: var(--color-accent-dark);
+  --color-seta-contraste: #9F7DEA; /* roxo no dark */
 }
 
 /* --- REGRAS AGRESSIVAS PARA FORÇAR BACKGROUND E TEXTO DO TEMA --- */

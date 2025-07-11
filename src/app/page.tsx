@@ -70,7 +70,7 @@ export default function Page() {
             {techSelecionada && (
               <button
                 onClick={handleVoltar}
-                className="mt-4 px-4 py-2 rounded bg-yellow-400 text-theme-font font-bold shadow hover:bg-yellow-500 transition text-base"
+                className="mt-4 px-4 py-2 rounded font-bold shadow transition text-base bg-[var(--color-font-primary)] text-[var(--color-bg-primary)] dark:bg-[var(--color-font-primary)] dark:text-[var(--color-bg-primary)]"
               >
                 Ver todos
               </button>

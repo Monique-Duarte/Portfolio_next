@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Typewriter } from 'react-simple-typewriter';
 import { useTranslation } from "react-i18next";
 import CardContainer from "../Flip/Flip";
-import { AboutTabsTabs, AboutTabsContent } from "./AboutTabs";
+import { AboutTabsContent } from "./AboutTabs";
 
 const WelcomeMessage = () => {
   const { t } = useTranslation();
@@ -43,7 +43,7 @@ const AboutMe = () => {
   return (
     <section className="w-full overflow-hidden bg-theme-background text-theme-font mt-[-80px] min-h-[90vh] pt-8">
       <div className="w-full max-w-[90vw] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-        <div className="col-span-1 lg:col-span-3 flex justify-center sm:my-10">
+        <div className="col-span-1 lg:col-span-3 flex justify-center sm:mt-10">
           <WelcomeMessage />
         </div>
         {/* Imagem/CardContainer */}

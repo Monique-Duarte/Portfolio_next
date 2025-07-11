@@ -1,8 +1,5 @@
 'use client';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
 import { useState } from 'react';
 
 const tabs = [
@@ -54,7 +51,14 @@ export function AboutTabsContent() {
             aria-expanded={openTab === tab.key}
           >
             <span>{t(tab.labelKey)}</span>
-            <span className={`ml-2 transition-transform ${openTab === tab.key ? 'rotate-90' : 'rotate-0'}`}>▶</span>
+            <span
+              className={`ml-2 transition-transform ${openTab === tab.key ? 'rotate-90' : 'rotate-0'}`}
+              style={{ color: 'var(--color-seta-contraste)' }}
+            >
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                <polygon points="6,4 15,10 6,16" />
+              </svg>
+            </span>
           </button>
           {/* Conteúdo da aba */}
           {openTab === tab.key && tab.key !== 'trajetoria' && (
@@ -73,7 +77,14 @@ export function AboutTabsContent() {
                     aria-expanded={openTrajetoria === idx}
                   >
                     <span>{bloco.titulo}</span>
-                    <span className={`ml-2 transition-transform ${openTrajetoria === idx ? 'rotate-90' : 'rotate-0'}`}>▶</span>
+                    <span
+                      className={`ml-2 transition-transform ${openTrajetoria === idx ? 'rotate-90' : 'rotate-0'}`}
+                      style={{ color: 'var(--color-seta-contraste)' }}
+                    >
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <polygon points="6,4 15,10 6,16" />
+                      </svg>
+                    </span>
                   </button>
                   {openTrajetoria === idx && (
                     <div className="p-4 bg-gradient-to-br from-theme-background/95 to-theme-accent-dark/20 rounded-b-lg text-theme-text border border-theme-accent-dark/10 animate-fade-in">
