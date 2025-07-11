@@ -104,7 +104,7 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
       </svg>
       <div className="relative z-10 w-[90vw] lg:w-[80vw] mx-auto my-10 rounded-xl">
         <h2 className="text-3xl font-bold text-center text-theme-font flex items-center justify-center gap-4">
-          <span className="section-title mb-5 md:mb-15">{t("meusConhecimentos")}</span>
+          <span className="section-title mb-15">{t("meusConhecimentos")}</span>
           {modoLista && (
             <span className="ml-4 text-2xl font-bold text-yellow-500 drop-shadow section-title">Destaque</span>
           )}
