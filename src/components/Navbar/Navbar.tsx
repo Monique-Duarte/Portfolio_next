@@ -16,9 +16,9 @@ const Navbar: React.FC<NavbarProps> = ({ onlyContactMobile = false, hideContactM
   const { t, ready } = useTranslation();
 
   const menuItems = useMemo(() => [
-    { link: '/', labelKey: 'navBar.aboutMe' },
-    { link: '/#skills', labelKey: 'navBar.skills' },
-    { link: '/#projects', labelKey: 'navBar.projects' },
+    { link: '#about', labelKey: 'navBar.aboutMe' },
+    { link: '#skills', labelKey: 'navBar.skills' },
+    { link: '#projects', labelKey: 'navBar.projects' },
   ], []);
 
   const [mounted, setMounted] = useState(false);

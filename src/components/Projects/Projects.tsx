@@ -15,28 +15,36 @@ interface Project {
   siteLink?: string;
   githubLink?: string;
   linkedin?: string;
+  techs?: string[];
+  featured?: boolean;
 }
 
 interface ProjectsProps {
   techFilter?: string | null;
+  abrirDemaisProjetos?: boolean;
+  setAbrirDemaisProjetos?: (v: boolean) => void;
 }
 
-const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
+const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, setAbrirDemaisProjetos }) => {
   const { t } = useTranslation();
   const [modalProjeto, setModalProjeto] = useState<Project | null>(null);
   const [showDemais, setShowDemais] = useState(false);
-  // Separar os projetos em destaques e demais
-  const restaurantIdx = (projectsData as Project[]).findIndex(p => p.id === 'restaurant');
-  const destaques = (projectsData as Project[]).slice(0, restaurantIdx + 1);
-  const demais = (projectsData as Project[]).slice(restaurantIdx + 1);
 
-  // Filtro só afeta os destaques
+  // Abrir automaticamente a lista de demais projetos quando abrirDemaisProjetos for true
+  React.useEffect(() => {
+    if (abrirDemaisProjetos) {
+      setShowDemais(true);
+      if (setAbrirDemaisProjetos) setAbrirDemaisProjetos(false);
+    }
+  }, [abrirDemaisProjetos, setAbrirDemaisProjetos]);
+
+  // Novo filtro: se houver techFilter, mostra todos os projetos que possuem a tech; se não, só os featured
   const filteredDestaques = techFilter
-    ? destaques.filter((project) => {
-        if (!project.tags) return false;
-        return project.tags.split(',').map(tag => tag.trim().toLowerCase()).includes((techFilter || '').toLowerCase());
-      })
-    : destaques;
+    ? (projectsData as Project[]).filter((project) => project.techs?.includes(techFilter))
+    : (projectsData as Project[]).filter((project) => project.featured);
+
+  // Demais projetos (todos, não só os que não estão em destaque)
+  const todosProjetos = (projectsData as Project[]);
 
   const theme = typeof window !== 'undefined' && document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 
@@ -85,6 +93,7 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
         </div>
         {/* Demais projetos - Accordion */}
         <button
+          id="demais-projetos"
           className="text-3xl font-extrabold mb-8 mt-8 text-center section-title relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-yellow-400 after:mx-auto after:mt-2 focus:outline-none transition-colors duration-300 flex items-center justify-center gap-2"
           style={{ outline: 'none' }}
           onClick={() => setShowDemais((prev) => !prev)}
@@ -99,7 +108,7 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
         </button>
         {showDemais && (
           <ul className="w-full max-w-5xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 mb-16 animate-fade-in">
-            {demais.map((project) => (
+            {todosProjetos.map((project) => (
               <li key={project.id} className="flex justify-center">
                 <button
                   className="relative text-lg font-bold text-theme-font section-title transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center group"
