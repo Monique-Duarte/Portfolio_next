@@ -19,7 +19,22 @@
       "quaisObj": "Meus objetivos?",
       "objetivos": "Estou sempre em busca de novos desafios e oportunidades para aplicar e expandir meus conhecimentos. Meu objetivo atual é ganhar experiência e crescer profissionalmente na área de programação, aprimorando minhas habilidades e consolidando minha trajetória na tecnologia.",
       "qualtrajetoria": "Minha trajetória",
-      "trajetoria": "Sou formada em Zootecnia, tenho um mestrado em Ciências pela USP. No entanto, minha paixão pela tecnologia me levou a buscar novas oportunidades e desafios. Em 2024, iniciei meus estudos como desenvolvdora FullStack, através da EBAC. Em 2025, iniciei a Pós-graduação em Engenharia de Software pela PUC Minas, onde aprendi habilidades essenciais para o desenvolvimento de software de alta qualidade. Atualmente, estou em busca de uma oportunidade como desenvolvedora, onde posso aplicar meus conhecimentos e continuar crescendo profissionalmente."
+      "trajetoria": {
+        "blocos": [
+          {
+            "titulo": "Formação & Raízes",
+            "texto": "Sou formada em Zootecnia e possuo mestrado em Ciências pela USP. Minha trajetória acadêmica me proporcionou uma base sólida em pesquisa, análise e resolução de problemas."
+          },
+          {
+            "titulo": "Transição para Tecnologia",
+            "texto": "Movida pela paixão por tecnologia, em 2024 iniciei meus estudos como desenvolvedora FullStack na EBAC. Em 2025, dei mais um passo importante ao ingressar na Pós-graduação em Engenharia de Software pela PUC Minas, onde aprofundei meus conhecimentos em desenvolvimento de software de alta qualidade."
+          },
+          {
+            "titulo": "Futuro & Propósito",
+            "texto": "Atualmente, busco uma oportunidade como desenvolvedora para aplicar meus conhecimentos, contribuir com projetos inovadores e continuar crescendo profissionalmente na área de tecnologia."
+          }
+        ]
+      }
     },
     "projetos": "Destaques",
     "lista_projetos": "Lista de Projetos",

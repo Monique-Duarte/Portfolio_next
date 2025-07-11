@@ -40,22 +40,19 @@ const WelcomeMessage = () => {
 };
 
 const AboutMe = () => {
-  const [activeTab, setActiveTab] = useState('quem');
   return (
     <section className="w-full overflow-hidden bg-theme-background text-theme-font mt-[-80px] min-h-[90vh] pt-8">
       <div className="w-full max-w-[90vw] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         <div className="col-span-1 lg:col-span-3 flex justify-center sm:my-10">
           <WelcomeMessage />
         </div>
-        <div className="flex justify-center sm:my-10 xl:my-20">
+        {/* Imagem/CardContainer */}
+        <div className="flex justify-center sm:my-10 xl:my-20 col-span-1">
           <CardContainer />
         </div>
-        <div className="flex sm:my-15 xl:my-25 flex-col gap-4 items-center text-base md:text-lg lg:text-xl xl:text-2xl">
-          <AboutTabsTabs active={activeTab} setActive={setActiveTab} />
-        </div>
-        {/* Resposta (AboutTabsContent) */}
-        <div className="flex mb-10 xl:my-20 items-center justify-center text-base md:text-lg lg:text-xl xl:text-2xl">
-          <AboutTabsContent active={activeTab} />
+        {/* AboutTabsContent ao lado da imagem só em lg+ */}
+        <div className="flex mb-10 xl:my-20 items-center justify-center w-full col-span-1 lg:col-span-2">
+          <AboutTabsContent />
         </div>
       </div>
     </section>
