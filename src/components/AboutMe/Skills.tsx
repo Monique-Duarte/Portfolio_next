@@ -49,9 +49,33 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
     };
   }, [selectedTech]);
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+
   if (modoLista) {
+    // Mobile: mostrar só o ícone selecionado
+    if (isMobile && selectedTech) {
+      const tech = techs.find(t => t.id === selectedTech);
+      return (
+        <div className="w-full flex flex-row items-center justify-center gap-3 px-1">
+          {tech && (
+            <div
+              className={`flex flex-col items-center justify-center min-w-[80px] border-yellow-300 bg-yellow-100/80 shadow-lg scale-110 h-14 rounded-full border-[1.5px] mx-1 bg-theme-background/90`}
+            >
+              <div className="mb-0.5 text-xl">{tech.icon}</div>
+              <p className="text-[10px] text-theme-text text-center whitespace-nowrap">{tech.level}</p>
+            </div>
+          )}
+        </div>
+      );
+    }
+    // Desktop ou mobile sem seleção: mostrar todos
     return (
-      <div className="flex flex-row flex-nowrap overflow-x-auto gap-3 w-full max-w-full px-1 md:justify-center md:flex-wrap md:overflow-visible">
+      <div
+        className={
+          `w-full max-w-full px-1 md:justify-center md:flex-wrap md:overflow-visible flex flex-row flex-nowrap gap-3 ` +
+          (isMobile ? 'flex-wrap overflow-visible' : 'overflow-x-auto')
+        }
+      >
         {techs.map((tech) => {
           const isSelected = selectedTech === tech.id;
           return (
@@ -70,7 +94,6 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
   }
 
   // Responsividade para o raio do círculo
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
   const radius = isMobile ? 140 : 180;
 
   return (

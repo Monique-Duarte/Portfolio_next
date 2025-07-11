@@ -51,6 +51,12 @@ export default function Page() {
     }, 100);
   };
 
+  const handleVoltarSelecao = () => {
+    setTechSelecionada(null);
+    setTechSelecionadaNome(null);
+    setModoLista(false);
+  };
+
   return (
     <main className="bg-theme-background text-theme-font min-h-screen transition-all duration-700 w-full overflow-visible">
       <div className="w-full max-w-7xl mx-auto px-4 md:px-0" id="about">
@@ -68,7 +74,32 @@ export default function Page() {
       <section id="projects" className="w-full flex flex-col items-center justify-center mt-8 px-2 md:px-0">
         <div className="w-full max-w-6xl xl:max-w-7xl 2xl:max-w-[1600px] mx-auto">
           <div className="flex flex-col items-center justify-center mb-8 w-full px-2 md:px-0">
-            <h2 className="text-3xl font-bold text-theme-font drop-shadow text-center">
+            <h2 className="text-3xl font-bold text-theme-font drop-shadow text-center flex items-center justify-center gap-2">
+              {techSelecionada && typeof window !== 'undefined' && window.innerWidth < 640 && (
+                <button
+                  onClick={handleVoltarSelecao}
+                  className="flex items-center justify-center w-10 h-10 rounded-full border-[1.5px] border-theme-font/40 bg-theme-background/90 mr-1"
+                  style={{ color: 'var(--color-font-primary)' }}
+                  aria-label="Voltar"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mx-auto"
+                  >
+                    <path
+                      d="M15 18L9 12L15 6"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              )}
               <span className="section-title">
                 {techSelecionadaNome && techSelecionadaNome.length > 0
                   ? `Destaques — ${techSelecionadaNome.charAt(0).toUpperCase() + techSelecionadaNome.slice(1)}`
