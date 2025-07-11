@@ -154,12 +154,12 @@ const Navbar: React.FC<NavbarProps> = ({ onlyContactMobile = false, hideContactM
             onClick={e => e.stopPropagation()}
           >
             <button className="absolute top-4 right-4 text-2xl font-bold hover:text-yellow-400" onClick={() => setShowContact(false)}>&times;</button>
-            <h2 className="text-2xl font-extrabold mb-4 section-title text-theme-font dark:text-white" style={{textShadow: '0 1px 2px rgba(0,0,0,0.08)'}}>Entre em contato</h2>
+            <h2 className="text-2xl font-extrabold mb-4 section-title text-theme-font dark:text-white" style={{textShadow: '0 1px 2px rgba(0,0,0,0.08)'}}>{t('navBar.contact')}</h2>
             <div className="flex gap-6 mb-6">
-              <a href="mailto:seuemail@email.com" target="_blank" rel="noopener noreferrer" className="text-theme-font dark:text-blue-200 hover:text-yellow-500 text-2xl" title="Email"><FaEnvelope /></a>
-              <a href="https://www.linkedin.com/in/seulinkedin" target="_blank" rel="noopener noreferrer" className="text-theme-font dark:text-blue-200 hover:text-yellow-500 text-2xl" title="LinkedIn"><FaLinkedin /></a>
-              <a href="https://github.com/seugithub" target="_blank" rel="noopener noreferrer" className="text-theme-font dark:text-blue-200 hover:text-yellow-500 text-2xl" title="GitHub"><FaGithub /></a>
-              <a href="https://wa.me/5599999999999" target="_blank" rel="noopener noreferrer" className="text-theme-font dark:text-blue-200 hover:text-yellow-500 text-2xl" title="WhatsApp"><FaWhatsapp /></a>
+              <a href="mailto:moniquead95@gmail.com" target="_blank" rel="noopener noreferrer" className="text-theme-font dark:text-blue-200 hover:text-yellow-500 text-2xl" title="Email"><FaEnvelope /></a>
+              <a href="https://www.linkedin.com/in/moniquead" target="_blank" rel="noopener noreferrer" className="text-theme-font dark:text-blue-200 hover:text-yellow-500 text-2xl" title="LinkedIn"><FaLinkedin /></a>
+              <a href="https://github.com/Monique-Duarte" target="_blank" rel="noopener noreferrer" className="text-theme-font dark:text-blue-200 hover:text-yellow-500 text-2xl" title="GitHub"><FaGithub /></a>
+              <a href="https://wa.me/19998000818" target="_blank" rel="noopener noreferrer" className="text-theme-font dark:text-blue-200 hover:text-yellow-500 text-2xl" title="WhatsApp"><FaWhatsapp /></a>
             </div>
             <div className="flex flex-col gap-2 mt-4 w-full items-center">
               <a

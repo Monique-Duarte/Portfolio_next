@@ -19,7 +19,22 @@
       "quaisObj": "My goals?",
       "objetivos": "I am always seeking new challenges and opportunities to apply and expand my knowledge. My current goal is to gain experience and grow professionally in programming, improving my skills and consolidating my career in technology.",
       "qualtrajetoria": "My journey",
-      "trajetoria": "I graduated in Zootechnics and have a master's degree in Science from USP. However, my passion for technology led me to seek new opportunities and challenges. In 2024, I started my studies as a FullStack developer through EBAC. In 2025, I began my postgraduate studies in Software Engineering at PUC Minas, where I learned essential skills for developing high-quality software. Currently, I am looking for an opportunity as a developer, where I can apply my knowledge and continue to grow professionally."
+      "trajetoria": {
+        "blocos": [
+          {
+            "titulo": "Education & Roots",
+            "texto": "I hold a degree in Zootechnics and a master's in Science from USP. My academic journey provided me with a solid foundation in research, analysis, and problem-solving."
+          },
+          {
+            "titulo": "Transition to Technology",
+            "texto": "Driven by my passion for technology, in 2024 I began my studies as a FullStack developer at EBAC. In 2025, I took a significant step by starting my postgraduate studies in Software Engineering at PUC Minas, where I deepened my knowledge in high-quality software development."
+          },
+          {
+            "titulo": "Future & Purpose",
+            "texto": "Currently, I am seeking an opportunity as a developer to apply my knowledge, contribute to innovative projects, and continue growing professionally in the technology field."
+          }
+        ]
+      }
     },
     "projetos": "Projects",
     "lista_projetos": "Project List",

@@ -19,7 +19,22 @@
       "quaisObj": "I miei obiettivi?",
       "objetivos": "Sono sempre alla ricerca di nuove sfide e opportunità per applicare ed espandere le mie conoscenze. Il mio obiettivo attuale è acquisire esperienza e crescere professionalmente nell'ambito della programmazione, migliorando le mie competenze e consolidando il mio percorso nella tecnologia.",
       "qualtrajetoria": "Il mio percorso",
-      "trajetoria": "Sono laureata in Zootecnia e ho un dottorato in Scienze presso USP. Tuttavia, la mia passione per la tecnologia mi ha portato a cercare nuove opportunità e sfide. Nel 2024, ho iniziato i miei studi come sviluppatrice FullStack attraverso l'EBAC. Nel 2025, ho iniziato la post-laurea in Ingegneria del Software presso PUC Minas, dove ho imparato abilità essenziali per lo sviluppo di software di alta qualità. Attualmente, sono alla ricerca di un'opportunità come sviluppatrice, dove posso applicare le mie conoscenze e continuare a crescere professionalmente."
+      "trajetoria": {
+        "blocos": [
+          {
+            "titulo": "Formazione & Radici",
+            "texto": "Sono laureata in Zootecnia e ho conseguito un dottorato in Scienze presso l’USP. Il mio percorso accademico mi ha fornito una solida base in ricerca, analisi e problem solving."
+          },
+          {
+            "titulo": "Transizione verso la Tecnologia",
+            "texto": "Spinta dalla passione per la tecnologia, nel 2024 ho iniziato gli studi come sviluppatrice FullStack presso EBAC. Nel 2025 ho compiuto un passo importante iniziando il post-laurea in Ingegneria del Software alla PUC Minas, dove ho approfondito le mie competenze nello sviluppo di software di alta qualità."
+          },
+          {
+            "titulo": "Futuro & Proposito",
+            "texto": "Attualmente sono alla ricerca di un’opportunità come sviluppatrice per applicare le mie conoscenze, contribuire a progetti innovativi e continuare a crescere professionalmente nel settore tecnologico."
+          }
+        ]
+      }
     },
     "projetos": "Progetti",
     "lista_projetos": "Elenco Progetti",

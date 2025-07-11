@@ -19,7 +19,22 @@
       "quaisObj": "Meine Ziele?",
       "objetivos": "Ich suche stets nach neuen Herausforderungen und Möglichkeiten, mein Wissen anzuwenden und zu erweitern. Mein aktuelles Ziel ist es, Erfahrung zu sammeln und mich beruflich im Programmierbereich weiterzuentwickeln, meine Fähigkeiten zu verbessern und meine Laufbahn in der Technologie zu festigen.",
       "qualtrajetoria": "Mein Werdegang",
-      "trajetoria": "Ich habe einen Abschluss in Zootechnik und einen Master in Wissenschaften an der USP. Dennoch führte meine Leidenschaft für Technologie dazu, nach neuen Herausforderungen und Möglichkeiten zu suchen. Im Jahr 2024 begann ich meine Studien als FullStack-Entwicklerin durch die EBAC. Im Jahr 2025 begann ich mein Postgraduiertenstudium in Software Engineering an der PUC Minas, wo ich wichtige Fähigkeiten für die Entwicklung hochwertiger Software erlernte. Derzeit suche ich eine Gelegenheit als Entwicklerin, wo ich meine Kenntnisse anwenden und mich beruflich weiterentwickeln kann."
+      "trajetoria": {
+        "blocos": [
+          {
+            "titulo": "Ausbildung & Wurzeln",
+            "texto": "Ich habe einen Abschluss in Zootechnik und einen Master in Wissenschaften an der USP. Mein akademischer Werdegang hat mir eine solide Grundlage in Forschung, Analyse und Problemlösung vermittelt."
+          },
+          {
+            "titulo": "Wechsel zur Technologie",
+            "texto": "Getrieben von meiner Leidenschaft für Technologie begann ich 2024 mein Studium als FullStack-Entwicklerin an der EBAC. 2025 machte ich einen wichtigen Schritt und begann mein Postgraduiertenstudium in Software Engineering an der PUC Minas, wo ich mein Wissen in der Entwicklung hochwertiger Software vertiefte."
+          },
+          {
+            "titulo": "Zukunft & Ziel",
+            "texto": "Derzeit suche ich eine Möglichkeit als Entwicklerin, um mein Wissen einzusetzen, zu innovativen Projekten beizutragen und mich beruflich im Technologiebereich weiterzuentwickeln."
+          }
+        ]
+      }
     },
     "projetos": "Projekte",
     "lista_projetos": "Projektliste",

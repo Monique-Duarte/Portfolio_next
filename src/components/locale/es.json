@@ -19,7 +19,22 @@
       "quaisObj": "¿Mis objetivos?",
       "objetivos": "Siempre estoy en busca de nuevos retos y oportunidades para aplicar y ampliar mis conocimientos. Mi objetivo actual es ganar experiencia y crecer profesionalmente en el área de programación, mejorando mis habilidades y consolidando mi trayectoria en tecnología.",
       "qualtrajetoria": "Mi trayectoria",
-      "trajetoria": "Soy graduada en Zootecnia y tengo una maestría en Ciencias por la USP. Sin embargo, mi pasión por la tecnología me llevó a buscar nuevas oportunidades y retos. En 2024, comencé mis estudios como desarrolladora FullStack a través de la EBAC. En 2025, inicié mi posgrado en Ingeniería de Software en PUC Minas, donde aprendí habilidades esenciales para el desarrollo de software de alta calidad. Actualmente, busco una oportunidad como desarrolladora, donde pueda aplicar mis conocimientos y seguir creciendo profesionalmente."
+      "trajetoria": {
+        "blocos": [
+          {
+            "titulo": "Formación y Raíces",
+            "texto": "Soy licenciada en Zootecnia y tengo una maestría en Ciencias por la USP. Mi trayectoria académica me brindó una base sólida en investigación, análisis y resolución de problemas."
+          },
+          {
+            "titulo": "Transición a la Tecnología",
+            "texto": "Impulsada por mi pasión por la tecnología, en 2024 inicié mis estudios como desarrolladora FullStack en EBAC. En 2025, di un paso importante al comenzar el posgrado en Ingeniería de Software en PUC Minas, donde profundicé mis conocimientos en desarrollo de software de alta calidad."
+          },
+          {
+            "titulo": "Futuro y Propósito",
+            "texto": "Actualmente, busco una oportunidad como desarrolladora para aplicar mis conocimientos, contribuir en proyectos innovadores y seguir creciendo profesionalmente en el área de tecnología."
+          }
+        ]
+      }
     },
     "projetos": "Proyectos",
     "lista_projetos": "Lista de Proyectos",

@@ -19,7 +19,22 @@
       "quaisObj": "Mes objectifs ?",
       "objetivos": "Je suis toujours à la recherche de nouveaux défis et opportunités pour appliquer et étendre mes connaissances. Mon objectif actuel est d'acquérir de l'expérience et de progresser professionnellement dans la programmation, en améliorant mes compétences et en consolidant mon parcours dans la technologie.",
       "qualtrajetoria": "Mon parcours",
-      "trajetoria": "Je suis diplômée en Zootechnie et j'ai un doctorat en Sciences à l'USP. Cependant, ma passion pour la technologie m'a poussée à chercher de nouvelles opportunités et défis. En 2024, j'ai commencé mes études en tant que développeuse FullStack à travers l'EBAC. En 2025, j'ai commencé ma post-graduation en Génie Logiciel à la PUC Minas, où j'ai appris des compétences essentielles pour le développement de logiciels de haute qualité. Actuellement, je cherche une opportunité en tant que développeuse, où je peux appliquer mes connaissances et continuer à progresser professionnellement."
+      "trajetoria": {
+        "blocos": [
+          {
+            "titulo": "Formation & Racines",
+            "texto": "Je suis diplômée en zootechnie et titulaire d'un master en sciences de l’USP. Mon parcours académique m’a apporté une solide base en recherche, analyse et résolution de problèmes."
+          },
+          {
+            "titulo": "Transition vers la Technologie",
+            "texto": "Animée par ma passion pour la technologie, j’ai débuté en 2024 une formation de développeuse FullStack à l’EBAC. En 2025, j’ai franchi une étape importante en commençant un postgraduate en Génie Logiciel à la PUC Minas, où j’ai approfondi mes compétences en développement logiciel de haute qualité."
+          },
+          {
+            "titulo": "Avenir & Objectif",
+            "texto": "Actuellement, je recherche une opportunité en tant que développeuse pour mettre en pratique mes connaissances, contribuer à des projets innovants et continuer à évoluer professionnellement dans le domaine technologique."
+          }
+        ]
+      }
     },
     "projetos": "Projets",
     "lista_projetos": "Liste de Projets",
