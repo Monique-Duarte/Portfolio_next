@@ -75,7 +75,7 @@ export default function Page() {
         <div className="w-full max-w-6xl xl:max-w-7xl 2xl:max-w-[1600px] mx-auto">
           <div className="flex flex-col items-center justify-center mb-8 w-full px-2 md:px-0">
             <h2 className="text-3xl font-bold text-theme-font drop-shadow text-center flex items-center justify-center gap-2">
-              {techSelecionada && typeof window !== 'undefined' && window.innerWidth < 640 && (
+              {techSelecionada && (
                 <button
                   onClick={handleVoltarSelecao}
                   className="flex items-center justify-center w-10 h-10 rounded-full border-[1.5px] border-theme-font/40 bg-theme-background/90 mr-1"
