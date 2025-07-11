@@ -54,7 +54,7 @@ const AboutMe = () => {
           <AboutTabsTabs active={activeTab} setActive={setActiveTab} />
         </div>
         {/* Resposta (AboutTabsContent) */}
-        <div className="flex sm:my-10 xl:my-20 items-center justify-center text-base md:text-lg lg:text-xl xl:text-2xl">
+        <div className="flex my-10 xl:my-20 items-center justify-center text-base md:text-lg lg:text-xl xl:text-2xl">
           <AboutTabsContent active={activeTab} />
         </div>
       </div>
