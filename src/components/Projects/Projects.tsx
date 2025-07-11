@@ -47,7 +47,6 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
       aria-label={t("projects.sectionAriaLabel")}
     >
       <div className="relative mx-auto w-full max-w-6xl z-10 flex flex-col items-center justify-center">
-        {/* Destaques - grid responsivo, box largo */}
         <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10 justify-center mb-20 items-start overflow-visible px-8 py-8">
           <AnimatePresence mode="wait">
             {filteredDestaques.map((project, idx) => (
@@ -62,7 +61,7 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter }) => {
                 <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${project.imgSrc})` }} />
                 <div className="absolute inset-0 bg-black/70 group-hover:bg-black/10 transition-all duration-500 z-10" />
                 <div className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full px-4 transition-all duration-500 group-hover:opacity-0 group-hover:scale-95">
-                  <h3 className="text-2xl font-extrabold text-white text-center whitespace-nowrap drop-shadow-lg mb-3 section-title" style={{textShadow: '0 2px 8px #000, 0 1px 0 #fff'}}>
+                  <h3 className="text-2xl font-extrabold text-white text-center whitespace-nowrap drop-shadow-lg my-3 section-title" style={{textShadow: '0 2px 8px #000, 0 1px 0 #fff'}}>
                     {t(project.titleKey)}
                   </h3>
                   <div className="flex flex-wrap gap-2 justify-center w-full">

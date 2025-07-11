@@ -74,20 +74,20 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
   const radius = isMobile ? 140 : 180;
 
   return (
-    <section className="bg-theme-background w-full">
+    <section className="bg-theme-background w-full md:mb-10">
       {/* SVG de ondulação/divisor no topo */}
       <svg viewBox="0 0 1440 100" className="w-full h-[60px] -mb-2 scale-x-[-1] mt-[-20]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <path className="ondulacao-detalhe" d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z" />
       </svg>
-      <div className="relative z-10 w-[90vw] lg:w-[80vw] mx-auto my-10 rounded-xl p-4 ">
+      <div className="relative z-10 w-[90vw] lg:w-[80vw] mx-auto my-10 rounded-xl">
         <h2 className="text-3xl font-bold text-center text-theme-font flex items-center justify-center gap-4">
-          <span className="section-title mb-15">{t("meusConhecimentos")}</span>
+          <span className="section-title mb-5 md:mb-15">{t("meusConhecimentos")}</span>
           {modoLista && (
             <span className="ml-4 text-2xl font-bold text-yellow-500 drop-shadow section-title">Destaque</span>
           )}
         </h2>
         {/* Animação circular/orbit das habilidades */}
-        <div className={`relative flex items-center justify-center h-[340px] w-full my-10 transition-all duration-700`}>
+        <div className={`relative flex items-center justify-center h-[340px] w-full md:my-10 transition-all duration-700`}>
           {/* Chamada central */}
           {!selectedTech && (
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center">
