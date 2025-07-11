@@ -98,7 +98,8 @@ export function AboutTabsContent() {
       {showTrajetoriaModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm animate-fade-in" onClick={() => setShowTrajetoriaModal(false)}>
           <div
-            className="relative rounded-2xl shadow-2xl p-8 max-w-6xl w-full border-2 border-[var(--color-font-primary)] animate-fade-in bg-[var(--color-bg-primary)] text-[var(--color-font-primary)] dark:bg-black/80 dark:text-theme-font"
+            className="relative rounded-2xl shadow-2xl p-8 max-w-6xl w-full border-2 border-[var(--color-font-primary)] animate-fade-in bg-[var(--color-bg-primary)] text-[var(--color-font-primary)] dark:bg-black/80 dark:text-theme-font
+            md:w-full w-[95vw] max-w-[95vw]"
             onClick={e => e.stopPropagation()}
             tabIndex={-1}
           >
@@ -110,9 +111,10 @@ export function AboutTabsContent() {
               &times;
             </button>
             <h3 className="text-2xl md:text-3xl font-bold mb-8 text-theme-font text-center">Minha trajetória</h3>
-            <div className="flex flex-col md:flex-row gap-6 items-stretch justify-center">
+            <div className="flex md:flex-row flex-row md:gap-6 gap-4 items-stretch justify-center md:overflow-visible overflow-x-auto scrollbar-thin scrollbar-thumb-theme-accent-dark/40 scrollbar-track-transparent"
+                 style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-x' }}>
               {blocos.map((bloco, idx) => (
-                <div key={idx} className="flex-1 bg-gradient-to-br from-theme-background/90 to-theme-accent-dark/30 rounded-xl p-6 shadow-md border border-theme-accent-dark/20 flex flex-col items-center animate-fade-in">
+                <div key={idx} className="flex-1 min-w-[260px] max-w-[90vw] md:min-w-0 md:max-w-none bg-gradient-to-br from-theme-background/90 to-theme-accent-dark/30 rounded-xl p-6 shadow-md border border-theme-accent-dark/20 flex flex-col items-center animate-fade-in">
                   <h4 className="text-lg md:text-xl font-bold mb-3 text-theme-font text-center">{bloco.titulo}</h4>
                   <p className="text-base md:text-lg text-theme-text text-center">{bloco.texto}</p>
                 </div>
