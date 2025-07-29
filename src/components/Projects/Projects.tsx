@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import projectsData from '../Cards/Cards';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; 
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from "next/image";
 import ModalButton from './ModalButton';
@@ -17,6 +17,8 @@ interface Project {
   linkedin?: string;
   techs?: string[];
   featured?: boolean;
+  videoSrc?: string;
+  additionalImages?: string[];
 }
 
 interface ProjectsProps {
@@ -29,21 +31,33 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
   const { t } = useTranslation();
   const [modalProjeto, setModalProjeto] = useState<Project | null>(null);
   const [showDemais, setShowDemais] = useState(false);
+  const [focusedMedia, setFocusedMedia] = useState<{ type: 'video' | 'image', src: string } | null>(null);
 
-  // Abrir automaticamente a lista de demais projetos quando abrirDemaisProjetos for true
-  React.useEffect(() => {
+  useEffect(() => {
     if (abrirDemaisProjetos) {
       setShowDemais(true);
       if (setAbrirDemaisProjetos) setAbrirDemaisProjetos(false);
     }
   }, [abrirDemaisProjetos, setAbrirDemaisProjetos]);
 
-  // Novo filtro: se houver techFilter, mostra todos os projetos que possuem a tech; se não, só os featured
+  useEffect(() => {
+    if (modalProjeto) {
+      if (modalProjeto.videoSrc) {
+        setFocusedMedia({ type: 'video', src: modalProjeto.videoSrc });
+      } else if (modalProjeto.additionalImages && modalProjeto.additionalImages.length > 0) {
+        setFocusedMedia({ type: 'image', src: modalProjeto.additionalImages[0] });
+      } else {
+        setFocusedMedia({ type: 'image', src: modalProjeto.imgSrc });
+      }
+    } else {
+      setFocusedMedia(null);
+    }
+  }, [modalProjeto]);
+
   const filteredDestaques = techFilter
     ? (projectsData as Project[]).filter((project) => project.techs?.includes(techFilter))
     : (projectsData as Project[]).filter((project) => project.featured);
 
-  // Demais projetos (todos, não só os que não estão em destaque)
   const todosProjetos = (projectsData as Project[]);
 
   const theme = typeof window !== 'undefined' && document.documentElement.classList.contains('dark') ? 'dark' : 'light';
@@ -65,6 +79,7 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
                 exit={{ opacity: 0, x: 60 }}
                 transition={{ duration: 0.5, delay: idx * 0.09, ease: [0.4, 0, 0.2, 1] }}
                 className="relative group rounded-2xl overflow-hidden shadow-xl border border-theme-font/20 bg-theme-background/80 transition-transform duration-500 hover:scale-105 hover:z-50 w-full min-h-[340px] h-[360px] flex flex-col justify-end cursor-pointer"
+                onClick={() => setModalProjeto(project)}
               >
                 <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${project.imgSrc})` }} />
                 <div className="absolute inset-0 bg-black/70 group-hover:bg-black/10 transition-all duration-500 z-10" />
@@ -80,21 +95,13 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
                     ))}
                   </div>
                 </div>
-                <button
-                  className="absolute z-30 left-1/2 bottom-6 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500"
-                  onClick={() => setModalProjeto(project)}
-                  tabIndex={-1}
-                >
-                  <ModalButton className="px-5 py-2 rounded-lg w-full">Ver mais</ModalButton>
-                </button>
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
-        {/* Demais projetos - Accordion */}
         <button
           id="demais-projetos"
-          className="text-3xl font-extrabold mb-8 mt-8 text-center section-title relative inline-block after:content-[''] after:block after:w-16 after:h-1 after:bg-yellow-400 after:mx-auto after:mt-2 focus:outline-none transition-colors duration-300 flex items-center justify-center gap-2"
+          className="text-3xl font-extrabold mb-8 mt-8 text-center section-title relative after:content-[''] after:block after:w-16 after:h-1 after:bg-yellow-400 after:mx-auto after:mt-2 focus:outline-none transition-colors duration-300 flex items-center justify-center gap-2"
           style={{ outline: 'none' }}
           onClick={() => setShowDemais((prev) => !prev)}
           aria-expanded={showDemais}
@@ -122,38 +129,113 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
             ))}
           </ul>
         )}
-        {/* Modal */}
+
+        {/* --- Modal Principal --- */}
         {modalProjeto && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={() => setModalProjeto(null)}>
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto"
+            onClick={() => setModalProjeto(null)}
+          >
             <div
-              className={`relative max-w-2xl w-full rounded-2xl shadow-2xl p-8 ${theme === 'dark' ? 'bg-gray-800' : 'bg-zinc-900'} text-white animate-fade-in`}
+              className={`relative max-w-5xl w-full rounded-2xl shadow-2xl p-6 md:p-8 ${theme === 'dark' ? 'bg-gray-800' : 'bg-zinc-900'} text-white animate-fade-in flex flex-col md:flex-row gap-6 md:gap-8`}
               onClick={e => e.stopPropagation()}
             >
               <button className="absolute top-4 right-4 text-2xl font-bold hover:text-yellow-400" onClick={() => setModalProjeto(null)}>&times;</button>
-              <h2 className="text-2xl font-bold mb-4 section-title">{t(modalProjeto.titleKey)}</h2>
-              <Image src={modalProjeto.imgSrc} alt={t(modalProjeto.altKey || '')} width={600} height={192} className="w-full h-48 object-cover rounded mb-4" />
-              <div className="flex flex-wrap gap-2 mb-4">
-                {modalProjeto.tags && modalProjeto.tags.split(',').map((tag, idx) => (
-                  <span key={idx} className="px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 text-xs font-semibold inline-block">
-                    {tag.trim()}
-                  </span>
-                ))}
+
+              <div className="flex-1 flex flex-col items-center justify-center min-w-0">
+                {focusedMedia && focusedMedia.type === 'video' ? (
+                  <video
+                    src={focusedMedia.src}
+                    controls
+                    autoPlay
+                    muted
+                    loop 
+                    className="w-full h-auto max-h-[450px] object-contain rounded mb-4 shadow-lg"
+                    style={{ aspectRatio: '10/8' }}
+                  >
+                    Seu navegador não suporta a tag de vídeo.
+                  </video>
+                ) : focusedMedia && focusedMedia.type === 'image' ? (
+                  <Image
+                    src={focusedMedia.src}
+                    alt={t(modalProjeto.altKey || '')}
+                    width={800} 
+                    height={450}
+                    className="w-full h-auto max-h-[450px] object-contain rounded mb-4 shadow-lg"
+                  />
+                ) : (
+                  <div className="w-full h-[450px] bg-gray-700 flex items-center justify-center rounded mb-4">
+                    <p>Nenhuma mídia disponível para este projeto.</p>
+                  </div>
+                )}
+
+                {/* Miniaturas da Galeria (inclui vídeo e imagens) */}
+                <div className="flex flex-wrap justify-center gap-2 mt-2 max-w-full overflow-hidden">
+                  {modalProjeto.videoSrc && (
+                    <div
+                      className={`relative cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 ${focusedMedia?.src === modalProjeto.videoSrc ? 'border-yellow-400 scale-105' : 'border-gray-600 hover:border-yellow-300'}`}
+                      onClick={() => setFocusedMedia({ type: 'video', src: modalProjeto.videoSrc! })}
+                    >
+                      <video
+                        src={modalProjeto.videoSrc}
+                        className="w-20 h-16 object-cover rounded-md"
+                        muted
+                        preload="metadata"
+                        playsInline 
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white">
+                        <div className="w-7 h-7 bg-black/50 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8 5.14v14l11-7-11-7z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {modalProjeto.additionalImages?.map((imgSrc, idx) => (
+                    <div
+                      key={`img-thumb-${idx}`}
+                      className={`cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 ${focusedMedia?.src === imgSrc ? 'border-yellow-400 scale-105' : 'border-gray-600 hover:border-yellow-300'}`}
+                      onClick={() => setFocusedMedia({ type: 'image', src: imgSrc })}
+                    >
+                      <Image
+                        src={imgSrc}
+                        alt={`${t(modalProjeto.altKey || '')} - ${idx + 1}`}
+                        width={80}
+                        height={64}
+                        className="w-20 h-16 object-cover rounded-md"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="mb-4">
-                {modalProjeto.descKey && (
-                  <p className="text-base">{t(modalProjeto.descKey)}</p>
-                )}
-              </div>
-              <div className="flex gap-4">
-                {modalProjeto.siteLink && modalProjeto.siteLink.trim() !== '' && (
-                  <ModalButton href={modalProjeto.siteLink}>SITE</ModalButton>
-                )}
-                {modalProjeto.githubLink && modalProjeto.githubLink.trim() !== '' && (
-                  <ModalButton href={modalProjeto.githubLink}>GITHUB</ModalButton>
-                )}
-                {modalProjeto.linkedin && modalProjeto.linkedin.trim() !== '' && (
-                  <ModalButton href={modalProjeto.linkedin}>Post LinkedIn</ModalButton>
-                )}
+
+              {/* Seção Direita: Título, Descrição e Links */}
+              <div className="flex-1 flex flex-col pt-4 md:pt-0 min-w-0">
+                <h2 className="text-3xl font-bold mb-4 section-title text-center md:text-left">{t(modalProjeto.titleKey)}</h2>
+                <div className="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
+                  {modalProjeto.tags && modalProjeto.tags.split(',').map((tag, idx) => (
+                    <span key={idx} className="px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 text-xs font-semibold inline-block">
+                      {tag.trim()}
+                    </span>
+                  ))}
+                </div>
+                <div className="mb-4 flex-grow overflow-y-auto pr-2 custom-scrollbar">
+                  {modalProjeto.descKey && (
+                    <p className="text-base leading-relaxed text-gray-200">{t(modalProjeto.descKey)}</p>
+                  )}
+                </div>
+                <div className="flex flex-wrap gap-4 mt-auto justify-center md:justify-start">
+                  {modalProjeto.siteLink && modalProjeto.siteLink.trim() !== '' && (
+                    <ModalButton href={modalProjeto.siteLink}>SITE</ModalButton>
+                  )}
+                  {modalProjeto.githubLink && modalProjeto.githubLink.trim() !== '' && (
+                    <ModalButton href={modalProjeto.githubLink}>GITHUB</ModalButton>
+                  )}
+                  {modalProjeto.linkedin && modalProjeto.linkedin.trim() !== '' && (
+                    <ModalButton href={modalProjeto.linkedin}>Post LinkedIn</ModalButton>
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -163,4 +245,4 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
   );
 };
 
-export default Projects; 
+export default Projects;

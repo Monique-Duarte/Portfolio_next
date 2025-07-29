@@ -1,5 +1,24 @@
 const projectsData = [
   {
+    titleKey: "projects.aura",
+    imgSrc: "/images/project/aura_dashboard.jpeg",
+    altKey: "projects.auraAlt",
+    tags: "Ionic, React, Firebase, TypeScript, Capacitor, Vite",
+    techs: ["ionic", "react", "firebase", "ts", "vite", "typescript"],
+    featured: true,
+    id: "aura",
+    siteLink: "",
+    githubLink: "https://github.com/Monique-Duarte/Aura",
+    descKey: "projects.auraDesc",
+    linkedin: "https://www.linkedin.com/posts/moniquead_controlefinanceiro-aplicativo-desenvolvimentomobile-activity-7354237699383341058-TwH3?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAABVZ3B0B3wsq2HZON99hwOtCO_Nc15likh8",
+    videoSrc: "/videos/Aura.mp4",
+    additionalImages: [
+      "/images/project/aura_login.jpeg",
+      "/images/project/aura_dashboard.jpeg",
+      "/images/project/aura_integracao.jpeg"
+    ],
+  },
+  {
     titleKey: "projects.portfolioNext",
     imgSrc: "/images/project/portNext.png",
     altKey: "projects.portfolioNextAlt",
@@ -37,19 +56,6 @@ const projectsData = [
     githubLink: "https://github.com/Monique-Duarte/Portfolio_2025.git",
     descKey: "projects.portfolioDesc",
     linkedin: "https://www.linkedin.com/posts/moniquead_desenvolvimentoweb-frontend-reactjs-activity-7339029070501797888-9JfD?utm_source=share&utm_medium=member_desktop&rcm=ACoAABVZ3B0B3wsq2HZON99hwOtCO_Nc15likh8",
-  },
-  {
-    titleKey: "projects.aura",
-    imgSrc: "/images/project/aura.jpeg",
-    altKey: "projects.auraAlt",
-    tags: "Ionic, React, Firebase, TypeScript, Capacitor, Vite",
-    techs: ["ionic", "react", "firebase", "ts"],
-    featured: true,
-    id: "aura",
-    siteLink: "",
-    githubLink: "https://github.com/Monique-Duarte/Aura",
-    descKey: "projects.auraDesc",
-    linkedin: "https://www.linkedin.com/posts/moniquead_desenvolvimentoweb-ionicreact-firebase-activity-7334313510337662976-Lh96?utm_source=share&utm_medium=member_desktop&rcm=ACoAABVZ3B0B3wsq2HZON99hwOtCO_Nc15likh8",
   },
   {
     titleKey: "projects.disneyCopy",

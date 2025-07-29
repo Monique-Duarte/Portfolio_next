@@ -117,7 +117,7 @@
       "githubButton": "GitHub",
       "aura": "Aura",
       "auraAlt": "Miniature de l'application Aura en Ionic",
-      "auraDesc": "Application développée avec Ionic, TypeScript et Capacitor, axée sur la performance et l’expérience mobile. Le projet utilise Vite pour des builds rapides, des intégrations modernes et suit les bonnes pratiques d’architecture pour les applications hybrides. Idéal pour démontrer la maîtrise du développement mobile multiplateforme."
+      "auraDesc": "Aura est une application financière multiplateforme développée sur une stack moderne. Son architecture est componentisée et réactive, utilisant des Hooks personnalisés pour séparer la logique métier de l'interface utilisateur et l'API Context pour la gestion de l'état global. Cette approche aboutit à une base de code propre et évolutive, alignée sur les meilleures pratiques de développement, garantissant une interface utilisateur constamment synchronisée. Le backend est une solution entièrement ‘serverless’ sur Firebase, utilisant Cloud Firestore en temps réel pour une synchronisation instantanée des données, des Cloud Functions planifiées pour l'automatisation et des règles de sécurité granulaires pour protéger les données. Le projet démontre des capacités avancées à travers des fonctionnalités telles que la gestion des paiements échelonnés, le partage de données financières entre utilisateurs et des tableaux de bord dynamiques."
     },
     "navBar": {
       "home": "Accueil",
