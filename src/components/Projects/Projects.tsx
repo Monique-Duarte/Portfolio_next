@@ -32,9 +32,6 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
   const [modalProjeto, setModalProjeto] = useState<Project | null>(null);
   const [showDemais, setShowDemais] = useState(false);
   const [focusedMedia, setFocusedMedia] = useState<{ type: 'video' | 'image', src: string } | null>(null);
-  
-  // --- 1. NOVO ESTADO ---
-  // Controla a visibilidade dos detalhes (descrição e links) no mobile.
   const [showMobileDetails, setShowMobileDetails] = useState(false);
 
   useEffect(() => {
@@ -70,7 +67,7 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
   // Função para abrir o modal e resetar o estado dos detalhes mobile.
   const handleOpenModal = (project: Project) => {
     setModalProjeto(project);
-    setShowMobileDetails(false); // Garante que os detalhes estarão ocultos ao abrir um novo modal
+    setShowMobileDetails(false);
   };
 
   return (
@@ -90,10 +87,8 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
                 exit={{ opacity: 0, x: 60 }}
                 transition={{ duration: 0.5, delay: idx * 0.09, ease: [0.4, 0, 0.2, 1] }}
                 className="relative group rounded-2xl overflow-hidden shadow-xl border border-theme-font/20 bg-theme-background/80 transition-transform duration-500 hover:scale-105 hover:z-50 w-full min-h-[340px] h-[360px] flex flex-col justify-end cursor-pointer"
-                // --- 3. ALTERAÇÃO NO ONCLICK ---
                 onClick={() => handleOpenModal(project)}
               >
-                {/* ... (código do card inalterado) ... */}
                 <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${project.imgSrc})` }} />
                 <div className="absolute inset-0 bg-black/70 group-hover:bg-black/10 transition-all duration-500 z-10" />
                 <div className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full px-4 transition-all duration-500 group-hover:opacity-0 group-hover:scale-95">
@@ -133,7 +128,6 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
                 <button
                   className="relative text-lg font-bold text-theme-font section-title transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center group"
                   style={{ textDecoration: 'none' }}
-                  // --- 3. ALTERAÇÃO NO ONCLICK ---
                   onClick={() => handleOpenModal(project)}
                 >
                   {t(project.titleKey)}
@@ -175,13 +169,13 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
                   <div className="md:flex-1 flex flex-col items-center justify-start min-w-0">
                     {/* ... (código da galeria de imagem/video - sem alterações) ... */}
                     {focusedMedia && focusedMedia.type === 'video' ? (
-                        <video src={focusedMedia.src} controls autoPlay muted loop className="w-full h-auto max-h-[450px] object-contain rounded mb-4 shadow-lg" style={{ aspectRatio: '10/8' }}>
+                        <video src={focusedMedia.src} controls autoPlay muted loop className="w-full h-auto max-h-[380px] object-contain rounded mb-4 shadow-lg" style={{ aspectRatio: '10/8' }}>
                             Seu navegador não suporta a tag de vídeo.
                         </video>
                     ) : focusedMedia && focusedMedia.type === 'image' ? (
-                        <Image src={focusedMedia.src} alt={t(modalProjeto.altKey || '')} width={800} height={450} className="w-full h-auto max-h-[450px] object-contain rounded mb-4 shadow-lg" />
+                        <Image src={focusedMedia.src} alt={t(modalProjeto.altKey || '')} width={800} height={380} className="w-full h-auto max-h-[380px] object-contain rounded mb-4 shadow-lg" />
                     ) : (
-                        <div className="w-full h-[450px] bg-gray-700 flex items-center justify-center rounded mb-4"><p>Nenhuma mídia disponível.</p></div>
+                        <div className="w-full h-[380px] bg-gray-700 flex items-center justify-center rounded mb-4"><p>Nenhuma mídia disponível.</p></div>
                     )}
                     <div className="flex flex-wrap justify-center gap-2 mt-2 max-w-full overflow-hidden">
                         {modalProjeto.videoSrc && (<div className={`relative cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 ${focusedMedia?.src === modalProjeto.videoSrc ? 'border-yellow-400 scale-105' : 'border-gray-600 hover:border-yellow-300'}`} onClick={() => setFocusedMedia({ type: 'video', src: modalProjeto.videoSrc! })}><video src={modalProjeto.videoSrc} className="w-20 h-16 object-cover rounded-md" muted preload="metadata" playsInline /><div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white"><div className="w-7 h-7 bg-black/50 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20"><svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"></path></svg></div></div></div>)}
