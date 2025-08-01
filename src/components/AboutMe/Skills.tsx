@@ -2,9 +2,19 @@
 
 import { useTranslation } from "react-i18next";
 import { FaReact, FaJsSquare, FaHtml5, FaCss3Alt, FaNodeJs } from "react-icons/fa";
-import { SiTypescript, SiFirebase, SiI18Next, SiNextdotjs } from "react-icons/si";
-import { SiIonic } from "react-icons/si";
-import { useMemo, useState, useRef, useEffect } from "react";
+import { SiTypescript, SiFirebase, SiI18Next, SiNextdotjs, SiIonic } from "react-icons/si";
+// Importamos o tipo ReactNode para usar na nossa interface
+import { useMemo, useState, useRef, useEffect, ReactNode } from "react";
+
+// --- 1. DEFINIÇÃO DA INTERFACE (TYPE) ---
+// Define a estrutura de cada objeto de tecnologia.
+// Isso garante que todos os objetos no array 'techs' tenham o mesmo formato.
+interface Tech {
+  name: string;
+  icon: ReactNode; // O tipo para componentes React ou elementos JSX
+  id: string;
+  level: string;
+}
 
 type SkillsProps = {
   onTechSelect?: (techId: string) => void;
@@ -14,10 +24,26 @@ type SkillsProps = {
 
 export default function Skills({ onTechSelect, selectedTech, modoLista }: SkillsProps) {
   const { t } = useTranslation();
+  
+  const [isMobile, setIsMobile] = useState(false);
 
-  const techs = useMemo(() => [
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  // --- 2. APLICAÇÃO DA INTERFACE ---
+  // Tipamos explicitamente a constante 'techs' como um array de 'Tech' (Tech[]).
+  const techs: Tech[] = useMemo(() => [
     { name: "React", icon: <FaReact size={32} color="#61dafb" />, id: "react", level: t("advanced") },
-    { name: "Next.js", icon: <SiNextdotjs size={32} color="#000" />, id: "nextjs", level: t("basic") },
+    // A cor do ícone do Next.js agora depende do tema do sistema (dark/light)
+    // Usamos um truque com CSS para isso, em vez de depender do 'isMobile' que pode não refletir o tema.
+    { name: "Next.js", icon: <SiNextdotjs size={32} className="text-black dark:text-white" />, id: "nextjs", level: t("basic") },
     { name: "JavaScript", icon: <FaJsSquare size={32} color="#f7df1e" />, id: "js", level: t("intermediate") },
     { name: "TypeScript", icon: <SiTypescript size={32} color="#3178c6" />, id: "ts", level: t("intermediate") },
     { name: "HTML", icon: <FaHtml5 size={32} color="#e34c26" />, id: "html", level: t("advanced") },
@@ -49,18 +75,13 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
     };
   }, [selectedTech]);
 
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-
   if (modoLista) {
-    // Mobile: mostrar só o ícone selecionado
     if (isMobile && selectedTech) {
       const tech = techs.find(t => t.id === selectedTech);
       return (
         <div className="w-full flex flex-row items-center justify-center gap-3 px-1">
           {tech && (
-            <div
-              className={`flex flex-col items-center justify-center min-w-[80px] border-yellow-300 bg-yellow-100/80 shadow-lg scale-110 h-14 rounded-full border-[1.5px] mx-1 bg-theme-background/90`}
-            >
+            <div className={`flex flex-col items-center justify-center min-w-[80px] border-yellow-300 bg-yellow-100/80 shadow-lg scale-110 h-14 rounded-full border-[1.5px] mx-1 bg-theme-background/90`}>
               <div className="mb-0.5 text-xl">{tech.icon}</div>
               <p className="text-[10px] text-theme-text text-center whitespace-nowrap">{tech.level}</p>
             </div>
@@ -68,22 +89,12 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
         </div>
       );
     }
-    // Desktop ou mobile sem seleção: mostrar todos
     return (
-      <div
-        className={
-          `w-full max-w-full px-1 md:justify-center md:flex-wrap md:overflow-visible flex flex-row flex-nowrap gap-3 ` +
-          (isMobile ? 'flex-wrap overflow-visible' : 'overflow-x-auto')
-        }
-      >
+      <div className={`w-full max-w-full px-1 md:justify-center md:flex-wrap md:overflow-visible flex flex-row flex-nowrap gap-3 ${isMobile ? 'flex-wrap overflow-visible' : 'overflow-x-auto'}`}>
         {techs.map((tech) => {
           const isSelected = selectedTech === tech.id;
           return (
-            <div
-              key={tech.id}
-              className={`flex flex-col items-center justify-center ${isSelected ? 'min-w-[80px] border-yellow-300 bg-yellow-100/80 shadow-lg scale-110' : 'min-w-[56px] border-theme-font/40'} h-14 rounded-full border-[1.5px] shadow-sm hover:scale-105 transition-transform cursor-pointer mx-1 bg-theme-background/90`}
-              onClick={() => onTechSelect && onTechSelect(tech.id)}
-            >
+            <div key={tech.id} className={`flex flex-col items-center justify-center ${isSelected ? 'min-w-[80px] border-yellow-300 bg-yellow-100/80 shadow-lg scale-110' : 'min-w-[56px] border-theme-font/40'} h-14 rounded-full border-[1.5px] shadow-sm hover:scale-105 transition-transform cursor-pointer mx-1 bg-theme-background/90`} onClick={() => onTechSelect && onTechSelect(tech.id)}>
               <div className="mb-0.5 text-xl">{tech.icon}</div>
               {isSelected && <p className="text-[10px] text-theme-text text-center whitespace-nowrap">{tech.level}</p>}
             </div>
@@ -93,12 +104,10 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
     );
   }
 
-  // Responsividade para o raio do círculo
   const radius = isMobile ? 140 : 180;
 
   return (
     <section className="bg-theme-background w-full md:mb-10">
-      {/* SVG de ondulação/divisor no topo */}
       <svg viewBox="0 0 1440 100" className="w-full h-[60px] -mb-2 scale-x-[-1] mt-[-20]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
         <path className="ondulacao-detalhe" d="M0,0 C480,100 960,0 1440,100 L1440,0 L0,0 Z" />
       </svg>
@@ -109,9 +118,7 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
             <span className="ml-4 text-2xl font-bold text-yellow-500 drop-shadow section-title">Destaque</span>
           )}
         </h2>
-        {/* Animação circular/orbit das habilidades */}
         <div className={`relative flex items-center justify-center h-[340px] w-full md:my-10 transition-all duration-700`}>
-          {/* Chamada central */}
           {!selectedTech && (
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center">
               <span className="text-lg md:text-xl font-bold text-theme-font animate-pulse text-center select-none" style={{ textShadow: '0 2px 8px var(--color-accent-light), 0 1px 0 #fff' }}>
@@ -125,18 +132,7 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
             const y = radius * Math.sin((angle * Math.PI) / 180);
             const isSelected = selectedTech === tech.id;
             return (
-              <div
-                key={tech.id}
-                style={{
-                  position: 'absolute',
-                  left: `calc(50% + ${x}px - ${isMobile ? 32 : 40}px)`,
-                  top: `calc(50% + ${y}px - ${isMobile ? 32 : 40}px)`,
-                  transition: 'transform 0.5s',
-                  zIndex: isSelected ? 10 : 1,
-                }}
-                className={`flex flex-col items-center justify-center ${isMobile ? 'w-16 h-16' : 'w-20 h-20'} rounded-full border-2 ${isSelected ? 'border-yellow-400 bg-yellow-100/80 shadow-lg scale-110' : 'border-theme-font/20 bg-theme-background/90'} shadow-sm hover:scale-110 transition-transform cursor-pointer relative`}
-                onClick={() => onTechSelect && onTechSelect(tech.id)}
-              >
+              <div key={tech.id} style={{ position: 'absolute', left: `calc(50% + ${x}px - ${isMobile ? 32 : 40}px)`, top: `calc(50% + ${y}px - ${isMobile ? 32 : 40}px)`, transition: 'transform 0.5s', zIndex: isSelected ? 10 : 1 }} className={`flex flex-col items-center justify-center ${isMobile ? 'w-16 h-16' : 'w-20 h-20'} rounded-full border-2 ${isSelected ? 'border-yellow-400 bg-yellow-100/80 shadow-lg scale-110' : 'border-theme-font/20 bg-theme-background/90'} shadow-sm hover:scale-110 transition-transform cursor-pointer relative`} onClick={() => onTechSelect && onTechSelect(tech.id)}>
                 <div className="absolute inset-0 rounded-full bg-black/10 dark:bg-white/10 pointer-events-none" />
                 <div className={`mb-1 ${isMobile ? 'text-xl' : 'text-2xl'}`}>{tech.icon}</div>
                 <h4 className="text-[10px] font-semibold text-theme-font text-center whitespace-nowrap">{tech.name}</h4>
