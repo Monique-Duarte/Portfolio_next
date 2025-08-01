@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import projectsData from '../Cards/Cards';
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from "next/image";
 import ModalButton from './ModalButton';
@@ -32,6 +32,10 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
   const [modalProjeto, setModalProjeto] = useState<Project | null>(null);
   const [showDemais, setShowDemais] = useState(false);
   const [focusedMedia, setFocusedMedia] = useState<{ type: 'video' | 'image', src: string } | null>(null);
+  
+  // --- 1. NOVO ESTADO ---
+  // Controla a visibilidade dos detalhes (descrição e links) no mobile.
+  const [showMobileDetails, setShowMobileDetails] = useState(false);
 
   useEffect(() => {
     if (abrirDemaisProjetos) {
@@ -62,6 +66,13 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
 
   const theme = typeof window !== 'undefined' && document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 
+  // --- 2. NOVA FUNÇÃO HELPER ---
+  // Função para abrir o modal e resetar o estado dos detalhes mobile.
+  const handleOpenModal = (project: Project) => {
+    setModalProjeto(project);
+    setShowMobileDetails(false); // Garante que os detalhes estarão ocultos ao abrir um novo modal
+  };
+
   return (
     <section
       id="projects"
@@ -79,8 +90,10 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
                 exit={{ opacity: 0, x: 60 }}
                 transition={{ duration: 0.5, delay: idx * 0.09, ease: [0.4, 0, 0.2, 1] }}
                 className="relative group rounded-2xl overflow-hidden shadow-xl border border-theme-font/20 bg-theme-background/80 transition-transform duration-500 hover:scale-105 hover:z-50 w-full min-h-[340px] h-[360px] flex flex-col justify-end cursor-pointer"
-                onClick={() => setModalProjeto(project)}
+                // --- 3. ALTERAÇÃO NO ONCLICK ---
+                onClick={() => handleOpenModal(project)}
               >
+                {/* ... (código do card inalterado) ... */}
                 <div className="absolute inset-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: `url(${project.imgSrc})` }} />
                 <div className="absolute inset-0 bg-black/70 group-hover:bg-black/10 transition-all duration-500 z-10" />
                 <div className="absolute z-20 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full px-4 transition-all duration-500 group-hover:opacity-0 group-hover:scale-95">
@@ -120,7 +133,8 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
                 <button
                   className="relative text-lg font-bold text-theme-font section-title transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-center group"
                   style={{ textDecoration: 'none' }}
-                  onClick={() => setModalProjeto(project)}
+                  // --- 3. ALTERAÇÃO NO ONCLICK ---
+                  onClick={() => handleOpenModal(project)}
                 >
                   {t(project.titleKey)}
                   <span className="block h-1 w-0 group-hover:w-full transition-all duration-300 bg-yellow-400 mx-auto mt-1"></span>
@@ -130,116 +144,87 @@ const Projects: React.FC<ProjectsProps> = ({ techFilter, abrirDemaisProjetos, se
           </ul>
         )}
 
-        {/* --- Modal Principal --- */}
-        {modalProjeto && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto"
-            onClick={() => setModalProjeto(null)}
-          >
-            <div
-              className={`relative max-w-5xl w-full rounded-2xl shadow-2xl p-6 md:p-8 ${theme === 'dark' ? 'bg-gray-800' : 'bg-zinc-900'} text-white animate-fade-in flex flex-col md:flex-row gap-6 md:gap-8`}
-              onClick={e => e.stopPropagation()}
+        {/* --- 4. ALTERAÇÕES NO MODAL PRINCIPAL --- */}
+        <AnimatePresence>
+          {modalProjeto && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 overflow-y-auto"
+              onClick={() => setModalProjeto(null)}
             >
-              <button className="absolute top-4 right-4 text-2xl font-bold hover:text-yellow-400" onClick={() => setModalProjeto(null)}>&times;</button>
+              <motion.div
+                initial={{ scale: 0.95, y: 20 }}
+                animate={{ scale: 1, y: 0 }}
+                exit={{ scale: 0.95, y: 20, opacity: 0 }}
+                transition={{ ease: "easeInOut", duration: 0.3 }}
+                className={`relative max-w-5xl w-full rounded-2xl shadow-2xl p-4 md:p-8 ${theme === 'dark' ? 'bg-gray-800' : 'bg-zinc-900'} text-white flex flex-col`}
+                onClick={e => e.stopPropagation()}
+              >
+                {/* --- Cabeçalho com Título e Botão de Fechar --- */}
+                <div className="flex justify-between items-start mb-4">
+                  <h2 className="text-2xl md:text-3xl font-bold section-title">{t(modalProjeto.titleKey)}</h2>
+                  <button className="text-3xl font-bold hover:text-yellow-400" onClick={() => setModalProjeto(null)}>&times;</button>
+                </div>
 
-              <div className="flex-1 flex flex-col items-center justify-center min-w-0">
-                {focusedMedia && focusedMedia.type === 'video' ? (
-                  <video
-                    src={focusedMedia.src}
-                    controls
-                    autoPlay
-                    muted
-                    loop 
-                    className="w-full h-auto max-h-[450px] object-contain rounded mb-4 shadow-lg"
-                    style={{ aspectRatio: '10/8' }}
-                  >
-                    Seu navegador não suporta a tag de vídeo.
-                  </video>
-                ) : focusedMedia && focusedMedia.type === 'image' ? (
-                  <Image
-                    src={focusedMedia.src}
-                    alt={t(modalProjeto.altKey || '')}
-                    width={800} 
-                    height={450}
-                    className="w-full h-auto max-h-[450px] object-contain rounded mb-4 shadow-lg"
-                  />
-                ) : (
-                  <div className="w-full h-[450px] bg-gray-700 flex items-center justify-center rounded mb-4">
-                    <p>Nenhuma mídia disponível para este projeto.</p>
+                {/* --- Corpo do Modal (Layout alterado) --- */}
+                <div className="flex flex-col md:flex-row gap-6 md:gap-8 flex-grow min-h-0">
+                  
+                  {/* --- Coluna da Esquerda: Mídia (Sempre visível) --- */}
+                  <div className="md:flex-1 flex flex-col items-center justify-start min-w-0">
+                    {/* ... (código da galeria de imagem/video - sem alterações) ... */}
+                    {focusedMedia && focusedMedia.type === 'video' ? (
+                        <video src={focusedMedia.src} controls autoPlay muted loop className="w-full h-auto max-h-[450px] object-contain rounded mb-4 shadow-lg" style={{ aspectRatio: '10/8' }}>
+                            Seu navegador não suporta a tag de vídeo.
+                        </video>
+                    ) : focusedMedia && focusedMedia.type === 'image' ? (
+                        <Image src={focusedMedia.src} alt={t(modalProjeto.altKey || '')} width={800} height={450} className="w-full h-auto max-h-[450px] object-contain rounded mb-4 shadow-lg" />
+                    ) : (
+                        <div className="w-full h-[450px] bg-gray-700 flex items-center justify-center rounded mb-4"><p>Nenhuma mídia disponível.</p></div>
+                    )}
+                    <div className="flex flex-wrap justify-center gap-2 mt-2 max-w-full overflow-hidden">
+                        {modalProjeto.videoSrc && (<div className={`relative cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 ${focusedMedia?.src === modalProjeto.videoSrc ? 'border-yellow-400 scale-105' : 'border-gray-600 hover:border-yellow-300'}`} onClick={() => setFocusedMedia({ type: 'video', src: modalProjeto.videoSrc! })}><video src={modalProjeto.videoSrc} className="w-20 h-16 object-cover rounded-md" muted preload="metadata" playsInline /><div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white"><div className="w-7 h-7 bg-black/50 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20"><svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.14v14l11-7-11-7z"></path></svg></div></div></div>)}
+                        {modalProjeto.additionalImages?.map((imgSrc, idx) => (<div key={`img-thumb-${idx}`} className={`cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 ${focusedMedia?.src === imgSrc ? 'border-yellow-400 scale-105' : 'border-gray-600 hover:border-yellow-300'}`} onClick={() => setFocusedMedia({ type: 'image', src: imgSrc })}><Image src={imgSrc} alt={`${t(modalProjeto.altKey || '')} - ${idx + 1}`} width={80} height={64} className="w-20 h-16 object-cover rounded-md" /></div>))}
+                    </div>
                   </div>
-                )}
 
-                {/* Miniaturas da Galeria (inclui vídeo e imagens) */}
-                <div className="flex flex-wrap justify-center gap-2 mt-2 max-w-full overflow-hidden">
-                  {modalProjeto.videoSrc && (
-                    <div
-                      className={`relative cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 ${focusedMedia?.src === modalProjeto.videoSrc ? 'border-yellow-400 scale-105' : 'border-gray-600 hover:border-yellow-300'}`}
-                      onClick={() => setFocusedMedia({ type: 'video', src: modalProjeto.videoSrc! })}
-                    >
-                      <video
-                        src={modalProjeto.videoSrc}
-                        className="w-20 h-16 object-cover rounded-md"
-                        muted
-                        preload="metadata"
-                        playsInline 
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/50 text-white">
-                        <div className="w-7 h-7 bg-black/50 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/20">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5.14v14l11-7-11-7z"></path>
-                          </svg>
-                        </div>
-                      </div>
+                  {/* --- Conteúdo da Direita (Desktop) / Seção Oculta (Mobile) --- */}
+                  <div className={`flex-col md:flex-1 min-w-0 ${showMobileDetails ? 'flex' : 'hidden md:flex'}`}>
+                    <div className="flex flex-wrap gap-2 mb-4 justify-start">
+                      {modalProjeto.tags && modalProjeto.tags.split(',').map((tag, idx) => (
+                        <span key={idx} className="px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 text-xs font-semibold inline-block">
+                          {tag.trim()}
+                        </span>
+                      ))}
                     </div>
-                  )}
-                  {modalProjeto.additionalImages?.map((imgSrc, idx) => (
-                    <div
-                      key={`img-thumb-${idx}`}
-                      className={`cursor-pointer border-2 rounded-lg overflow-hidden transition-all duration-200 ${focusedMedia?.src === imgSrc ? 'border-yellow-400 scale-105' : 'border-gray-600 hover:border-yellow-300'}`}
-                      onClick={() => setFocusedMedia({ type: 'image', src: imgSrc })}
-                    >
-                      <Image
-                        src={imgSrc}
-                        alt={`${t(modalProjeto.altKey || '')} - ${idx + 1}`}
-                        width={80}
-                        height={64}
-                        className="w-20 h-16 object-cover rounded-md"
-                      />
+                    <div className="mb-4 flex-grow overflow-y-auto pr-2 custom-scrollbar">
+                      {modalProjeto.descKey && (
+                        <p className="text-base leading-relaxed text-gray-200">{t(modalProjeto.descKey)}</p>
+                      )}
                     </div>
-                  ))}
+                    <div className="flex flex-wrap gap-4 mt-auto justify-start">
+                      {modalProjeto.siteLink && <ModalButton href={modalProjeto.siteLink}>SITE</ModalButton>}
+                      {modalProjeto.githubLink && <ModalButton href={modalProjeto.githubLink}>GITHUB</ModalButton>}
+                      {modalProjeto.linkedin && <ModalButton href={modalProjeto.linkedin}>Post LinkedIn</ModalButton>}
+                    </div>
+                  </div>
                 </div>
-              </div>
+                
+                {/* --- Botão "Ver Detalhes" (Apenas Mobile) --- */}
+                <div className="mt-6 md:hidden flex justify-center">
+                  <button
+                    onClick={() => setShowMobileDetails(prev => !prev)}
+                    className="w-full text-center py-3 px-4 bg-yellow-400 text-zinc-900 font-bold rounded-lg transition-transform duration-200 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2 focus:ring-offset-gray-800"
+                  >
+                    {showMobileDetails ? 'Ocultar Detalhes' : 'Ver Descrição e Links'}
+                  </button>
+                </div>
 
-              {/* Seção Direita: Título, Descrição e Links */}
-              <div className="flex-1 flex flex-col pt-4 md:pt-0 min-w-0">
-                <h2 className="text-3xl font-bold mb-4 section-title text-center md:text-left">{t(modalProjeto.titleKey)}</h2>
-                <div className="flex flex-wrap gap-2 mb-4 justify-center md:justify-start">
-                  {modalProjeto.tags && modalProjeto.tags.split(',').map((tag, idx) => (
-                    <span key={idx} className="px-2 py-0.5 rounded bg-yellow-100 text-yellow-800 text-xs font-semibold inline-block">
-                      {tag.trim()}
-                    </span>
-                  ))}
-                </div>
-                <div className="mb-4 flex-grow overflow-y-auto pr-2 custom-scrollbar">
-                  {modalProjeto.descKey && (
-                    <p className="text-base leading-relaxed text-gray-200">{t(modalProjeto.descKey)}</p>
-                  )}
-                </div>
-                <div className="flex flex-wrap gap-4 mt-auto justify-center md:justify-start">
-                  {modalProjeto.siteLink && modalProjeto.siteLink.trim() !== '' && (
-                    <ModalButton href={modalProjeto.siteLink}>SITE</ModalButton>
-                  )}
-                  {modalProjeto.githubLink && modalProjeto.githubLink.trim() !== '' && (
-                    <ModalButton href={modalProjeto.githubLink}>GITHUB</ModalButton>
-                  )}
-                  {modalProjeto.linkedin && modalProjeto.linkedin.trim() !== '' && (
-                    <ModalButton href={modalProjeto.linkedin}>Post LinkedIn</ModalButton>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
