@@ -11,7 +11,7 @@ const projectsData = [
     githubLink: "https://github.com/Monique-Duarte/Aura",
     descKey: "projects.auraDesc",
     linkedin: "https://www.linkedin.com/posts/moniquead_controlefinanceiro-aplicativo-desenvolvimentomobile-activity-7354237699383341058-TwH3?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAABVZ3B0B3wsq2HZON99hwOtCO_Nc15likh8",
-    videoSrc: "/videos/Aura.mp4",
+    videoSrc: "/videos/aura.mp4",
     additionalImages: [
       "/images/project/aura_login.jpeg",
       "/images/project/aura_dashboard.jpeg",
