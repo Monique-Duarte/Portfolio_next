@@ -3,13 +3,18 @@
 import AboutMe from '../components/AboutMe/AboutMe';
 import Projects from '../components/Projects/Projects';
 import Skills from '../components/AboutMe/Skills';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Page() {
   const [techSelecionada, setTechSelecionada] = useState<string | null>(null);
   const [modoLista, setModoLista] = useState(false);
   const [techSelecionadaNome, setTechSelecionadaNome] = useState<string | null>(null);
   const [abrirDemaisProjetos, setAbrirDemaisProjetos] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   // Lista de skills para mapear id -> nome
   const skillsList = [
@@ -64,11 +69,16 @@ export default function Page() {
       </div>
       {/* Habilidades centralizadas sempre */}
       <section id="skills" className="w-full flex flex-col items-center justify-center mt-4 md:mt-8 px-2 md:px-0">
-        <Skills
-          onTechSelect={handleTechSelect}
-          selectedTech={techSelecionada || undefined}
-          modoLista={modoLista}
-        />
+        {!isClient && (
+          <div className="w-full h-[350px]" />
+        )}
+        {isClient && (
+          <Skills
+            onTechSelect={handleTechSelect}
+            selectedTech={techSelecionada || undefined}
+            modoLista={modoLista}
+          />
+        )}
       </section>
       {/* Seção de projetos filtrável, centralizada */}
       <section id="projects" className="w-full flex flex-col items-center justify-center mt-8 px-2 md:px-0">
