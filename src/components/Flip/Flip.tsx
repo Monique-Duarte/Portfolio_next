@@ -4,7 +4,7 @@ import React, { useState, KeyboardEvent } from "react";
 import Image from "next/image";
 import './flip-animations.css';
 
-const IMG_FRONT_PATH = "/images/frente.jpeg";
+const IMG_FRONT_PATH = "/images/frente.png";
 const IMG_BACK_PATH = "/images/verso.jpeg";
 
 interface FlipCardProps {

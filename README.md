@@ -61,7 +61,8 @@ src/
   public/
     images/
     favicon.svg
-    cv.pdf
+    curriculo-pt.pdf
+    curriculo-en.pdf
 ```
 
 ---

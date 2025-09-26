@@ -1,10 +1,10 @@
-import BaixarCurriculo from "../Blob/blob";
+import DownloadButton from "../Blob/blob";
 import ContactIcon from "./contactIcon";
 
 const Contact = () => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-center gap-6 text-white mt-6">
-      <div className="flex space-x-2 text-2xl">
+      <div className="flex space-x-4 text-2xl">
         <ContactIcon
           href="https://www.instagram.com/duartt.monique/"
           iconClass="bi bi-instagram"
@@ -32,15 +32,22 @@ const Contact = () => {
         />
       </div>
 
-      <button
-        className="transition-colors rounded-lg shadow-md text-white font-semibold text-lg flex items-center space-x-2 focus:outline-none focus:ring-4 focus:ring-blue-400"
-        aria-label="Baixar Currículo"
-      >
-        <BaixarCurriculo />
-      </button>
+      <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 md:mt-0">
+        <DownloadButton
+          filePath="/curriculo-pt.pdf"
+          fileName="curriculo-monique-duarte-pt.pdf"
+          buttonText="📄 Baixar Currículo (PT)"
+          variant="primary"
+        />
+        <DownloadButton
+          filePath="/curriculo-en.pdf"
+          fileName="curriculum-monique-duarte-en.pdf"
+          buttonText="📄 Download Resume (EN)"
+          variant="secondary"
+        />
+      </div>
     </div>
   );
 };
 
 export default Contact;
-
