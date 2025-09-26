@@ -1,3 +1,4 @@
+// src/components/Header/Header.tsx
 'use client';
 
 import { FC, useEffect, useState } from 'react';
@@ -16,7 +17,7 @@ const Header: FC = () => {
     setMounted(true);
   }, []);
 
-  if (!mounted) return null;
+  if (!mounted) return null; // Evita renderização no servidor que pode causar inconsistência de tema
 
   const isDark = resolvedTheme === 'dark';
   const Icon = isDark ? FaSun : FaMoon;
@@ -26,53 +27,52 @@ const Header: FC = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 shadow-md transition-colors bg-theme-background text-theme-font px-4">
-      <div className="hidden md:grid grid-cols-3 items-center">
-        <div className="flex items-center justify-start gap-4">
+    <header className="fixed top-0 left-0 w-full z-50 shadow-md transition-colors bg-theme-background/80 backdrop-blur-sm text-theme-font px-4 py-2">
+      
+      {/* ===== LAYOUT DESKTOP (acima de md) ===== */}
+      <div className="hidden md:flex max-w-7xl mx-auto items-center justify-between">
+        <div className="flex-1 flex justify-start">
+          <h2 className="font-bold text-2xl md:text-3xl whitespace-nowrap text-theme-h2">
+            {t('header')}
+          </h2>
+        </div>
+        
+        <div className="flex-1 flex justify-center">
+          <Navbar />
+        </div>
+
+        <div className="flex-1 flex items-center justify-end gap-4">
+          <LanguageSwitcher />
           <button
             onClick={toggleTheme}
             aria-label="Alternar tema"
-            className="p-2 rounded-full transition-colors bg-light-background hover:bg-light-accent-light/30 dark:bg-dark-background dark:hover:bg-dark-accent-light/30 text-light-icons dark:text-dark-icons"
+            className="p-2 rounded-full transition-colors hover:bg-theme-font/10 text-theme-font"
           >
             <Icon className="text-xl md:text-2xl" />
           </button>
-          <LanguageSwitcher />
-        </div>
-
-        <div className="flex justify-center">
-          <h2 className="font-bold text-3xl whitespace-nowrap text-theme-h2">
-            {t('header')}
-          </h2>
-        </div>
-
-        <div className="flex justify-end">
-          <Navbar />
         </div>
       </div>
 
-      <div className="flex flex-col md:hidden gap-2">
-        <div className="flex justify-center">
-          <h2 className="text-xl font-bold whitespace-nowrap text-theme-h1">
+      {/* ===== LAYOUT MOBILE (abaixo de md) ===== */}
+      <div className="flex flex-col md:hidden">
+        {/* Primeira linha: Título e Seletor de Tema */}
+        <div className="flex justify-between items-center">
+          <h2 className="font-bold text-xl whitespace-nowrap text-theme-h2">
             {t('header')}
           </h2>
-        </div>
-
-        <div className="flex items-center gap-4 w-full">
           <button
             onClick={toggleTheme}
             aria-label="Alternar tema"
-            className="p-2 rounded-full transition-colors bg-light-background hover:bg-light-accent-light/30 dark:bg-dark-background dark:hover:bg-dark-accent-light/30 text-light-icons dark:text-dark-icons"
+            className="p-2 rounded-full transition-colors hover:bg-theme-font/10 text-theme-font"
           >
             <Icon className="text-xl" />
           </button>
-          <LanguageSwitcher />
-          <div className="flex-1" />
-          {/* Botão de contato mobile */}
-          <Navbar onlyContactMobile />
         </div>
-
-        <div className="flex justify-center">
-          <Navbar hideContactMobile />
+        
+        {/* Segunda linha: Navegação e Idiomas */}
+        <div className="flex justify-between items-center mt-2">
+          <Navbar />
+          <LanguageSwitcher />
         </div>
       </div>
     </header>

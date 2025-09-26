@@ -3,15 +3,11 @@
 import { useTranslation } from "react-i18next";
 import { FaReact, FaJsSquare, FaHtml5, FaCss3Alt, FaNodeJs } from "react-icons/fa";
 import { SiTypescript, SiFirebase, SiI18Next, SiNextdotjs, SiIonic } from "react-icons/si";
-// Importamos o tipo ReactNode para usar na nossa interface
 import { useMemo, useState, useRef, useEffect, ReactNode } from "react";
 
-// --- 1. DEFINIÇÃO DA INTERFACE (TYPE) ---
-// Define a estrutura de cada objeto de tecnologia.
-// Isso garante que todos os objetos no array 'techs' tenham o mesmo formato.
 interface Tech {
   name: string;
-  icon: ReactNode; // O tipo para componentes React ou elementos JSX
+  icon: ReactNode;
   id: string;
   level: string;
 }
@@ -37,12 +33,9 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // --- 2. APLICAÇÃO DA INTERFACE ---
-  // Tipamos explicitamente a constante 'techs' como um array de 'Tech' (Tech[]).
+
   const techs: Tech[] = useMemo(() => [
     { name: "React", icon: <FaReact size={32} color="#61dafb" />, id: "react", level: t("advanced") },
-    // A cor do ícone do Next.js agora depende do tema do sistema (dark/light)
-    // Usamos um truque com CSS para isso, em vez de depender do 'isMobile' que pode não refletir o tema.
     { name: "Next.js", icon: <SiNextdotjs size={32} className="text-black dark:text-white" />, id: "nextjs", level: t("basic") },
     { name: "JavaScript", icon: <FaJsSquare size={32} color="#f7df1e" />, id: "js", level: t("intermediate") },
     { name: "TypeScript", icon: <SiTypescript size={32} color="#3178c6" />, id: "ts", level: t("intermediate") },
@@ -81,7 +74,7 @@ export default function Skills({ onTechSelect, selectedTech, modoLista }: Skills
       return (
         <div className="w-full flex flex-row items-center justify-center gap-3 px-1">
           {tech && (
-            <div className={`flex flex-col items-center justify-center min-w-[80px] border-yellow-300 bg-yellow-100/80 shadow-lg scale-110 h-14 rounded-full border-[1.5px] mx-1 bg-theme-background/90`}>
+            <div className={`flex flex-col items-center justify-center min-w-[80px] border-yellow-300 bg-yellow-100/80 shadow-lg scale-110 h-14 rounded-full border-[1.5px] mx-1`}>
               <div className="mb-0.5 text-xl">{tech.icon}</div>
               <p className="text-[10px] text-theme-text text-center whitespace-nowrap">{tech.level}</p>
             </div>

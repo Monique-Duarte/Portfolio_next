@@ -132,6 +132,14 @@
     "contact": {
       "viewResume": "Lebenslauf ansehen",
       "downloadResume": "Lebenslauf herunterladen"
+    },
+    "resumeCard": {
+      "title": "Lebensläufe",
+      "status": "Verfügbar für neue Möglichkeiten",
+      "viewPT": "Ansehen (PT)",
+      "viewEN": "Ansehen (EN)",
+      "downloadPT": "Herunterladen (PT)",
+      "downloadEN": "Herunterladen (EN)"
     }
   }
 }

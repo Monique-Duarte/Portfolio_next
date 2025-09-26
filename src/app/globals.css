@@ -23,48 +23,49 @@
 /* --- DEFINIÇÃO DAS VARIÁVEIS CSS DE TEMA --- */
 /* Modo LIGHT (padrão) */
 :root {
-  --color-bg-primary: #FDC96C;
-  --color-bg-primary-rgb: 253, 201, 108;
-  --color-font-primary: #31456A;
-  --color-text-primary: #31456A;
-  --color-icons-primary: #31456A;
-  --color-button-primary: #31456A;
-  --color-accent-light: #e4b561;
-  --color-accent-dark: #FFDC73;
-  --color-accent-dark-rgb: 255, 220, 115;
-  --color-h1-primary: #D1A55A;
-  --color-rgb-r: 255;
-  --color-rgb-g: 221;
-  --color-rgb-b: 119;
-  --color-shadow-light: var(--color-accent-light);
-  --color-shadow-dark: var(--color-accent-dark);
-  --color-seta-contraste: var(--color-font-primary); /* cor do título no light */
+  --color-background: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #1A202C;
+  --color-text-secondary: #4A5568;
+  --color-accent: #F97316;
+  --color-accent-hover: #EA580C;
+  --color-border: #E2E8F0;
 }
 
 /* Modo DARK */
 .dark {
-  --color-bg-primary: #2E343B;
-  --color-bg-primary-rgb: 46, 52, 59;
-  --color-font-primary: #9F7DEA;
-  --color-text-primary: #7B8499;
-  --color-icons-primary: #9F7DEA;
-  --color-button-primary: #9F7DEA;
-  --color-accent-light: #292f35;
-  --color-accent-dark: #333941;
-  --color-accent-dark-rgb: 51, 57, 65;
-  --color-h1-primary: #464E59;
-  --color-rgb-r: 51;
-  --color-rgb-g: 57;
-  --color-rgb-b: 65;
-  --color-shadow-light: var(--color-accent-light);
-  --color-shadow-dark: var(--color-accent-dark);
-  --color-seta-contraste: #9F7DEA; /* roxo no dark */
+  --color-background: #1A202C;
+  --color-surface: #2D3748;
+  --color-text-primary: #F7FAFC;
+  --color-text-secondary: #A0AEC0;
+  --color-accent: #F97316;
+  --color-accent-hover: #FB923C;
+  --color-border: #4A5568;
 }
 
 /* --- REGRAS AGRESSIVAS PARA FORÇAR BACKGROUND E TEXTO DO TEMA --- */
 body {
-  background-color: var(--color-bg-primary) !important;
-  color: var(--color-font-primary) !important;
+  background-color: var(--color-background) !important;
+  color: var(--color-text-primary) !important;
+}
+
+.bg-theme-background {
+  background-color: var(--color-background);
+}
+.text-theme-font {
+  color: var(--color-text-primary);
+}
+.text-theme-h2 {
+  color: var(--color-text-primary);
+}
+.border-theme-font\/20 {
+  border-color: var(--color-border);
+}
+.text-theme-text {
+  color: var(--color-text-secondary);
+}
+.bg-theme-background\/80 {
+  background-color: var(--color-surface);
 }
 
 header {
@@ -119,17 +120,12 @@ header a, header button, header span, header div {
   animation: float-slow-reverse 7s ease-in-out infinite;
 }
 svg .ondulacao-detalhe {
-  fill: #FFEDBF;
+  fill: var(--color-surface);
+  opacity: 0.6;
 }
 .dark svg .ondulacao-detalhe {
-  fill: #FDC96C !important;
-}
-
-svg .ondulacao-detalhe {
-  fill: #2E343B !important;
-}
-.dark svg .ondulacao-detalhe {
-  fill: #FDC96C !important;
+  fill: var(--color-surface);
+  opacity: 1;
 }
 
 .section-title {

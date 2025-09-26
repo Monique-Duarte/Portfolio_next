@@ -132,6 +132,14 @@
     "contact": {
       "viewResume": "Ver Currículum",
       "downloadResume": "Descargar Currículum"
-    }
+    },
+    "resumeCard": {
+      "title": "Currículums",
+      "status": "Disponible para oportunidades",
+      "viewPT": "Ver (PT)",
+      "viewEN": "Ver (EN)",
+      "downloadPT": "Descargar (PT)",
+      "downloadEN": "Descargar (EN)"
+  }
   }
 }

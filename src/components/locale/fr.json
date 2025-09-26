@@ -132,6 +132,14 @@
     "contact": {
       "viewResume": "Voir le CV",
       "downloadResume": "Télécharger le CV"
+    },
+    "resumeCard": {
+      "title": "CVs",
+      "status": "Disponible pour de nouvelles opportunités",
+      "viewPT": "Voir (PT)",
+      "viewEN": "Voir (EN)",
+      "downloadPT": "Télécharger (PT)",
+      "downloadEN": "Télécharger (EN)"
     }
   }
 }

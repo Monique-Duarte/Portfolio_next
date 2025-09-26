@@ -3,6 +3,7 @@
 import AboutMe from '../components/AboutMe/AboutMe';
 import Projects from '../components/Projects/Projects';
 import Skills from '../components/AboutMe/Skills';
+import ResumeCard from '../components/ResumeCard/ResumeCard';
 import { useState, useEffect } from 'react';
 
 export default function Page() {
@@ -67,6 +68,7 @@ export default function Page() {
       <div className="w-full max-w-7xl mx-auto px-4 md:px-0" id="about">
         <AboutMe />
       </div>
+      <ResumeCard />
       {/* Habilidades centralizadas sempre */}
       <section id="skills" className="w-full flex flex-col items-center justify-center mt-4 md:mt-8 px-2 md:px-0">
         {!isClient && (

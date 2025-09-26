@@ -1,4 +1,3 @@
-// src/app/layout.tsx
 import './globals.css';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
@@ -48,32 +47,37 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
       </head>
-      <body className={`font-comfortaa bg-[#FFEDBF] min-h-screen overflow-visible`}>
+      <body className={`font-comfortaa min-h-screen overflow-visible`}>
         <BackgroundLines />
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <I18nProvider>
-            <header className="w-full bg-gradient-to-r from-[#FFE08C] to-[#FFEDBF] shadow-md">
-              <Header />
-            </header>
-            {/* Divisor SVG ondulado entre header e conteúdo principal */}
-            <div className="w-full overflow-hidden -mt-1">
-              <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-46 sm:h-[130px] lg:h-[15hv]">
-                <path className="ondulacao-detalhe" d="M0,60 C480,0 960,60 1440,0 L1440,60 L0,60 Z" transform="scale(1,-1) translate(0,-60)" />
-              </svg>
+
+            <Header />
+
+            <div className="pt-8">
+              {/* Divisor SVG ondulado */}
+              <div className="w-full overflow-hidden">
+                <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-46 sm:h-[130px] lg:h-[15hv]">
+                  <path className="ondulacao-detalhe" d="M0,60 C480,0 960,60 1440,0 L1440,60 L0,60 Z" transform="scale(1,-1) translate(0,-60)" />
+                </svg>
+              </div>
+
+              <main className="w-full">
+                {children}
+              </main>
+
+              <div className="w-full overflow-hidden -mt-1">
+                <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+                  <path className="ondulacao-detalhe" d="M0,60 C480,0 960,60 1440,0 L1440,60 L0,60 Z" />
+                </svg>
+              </div>
+
+              <footer className="w-full bg-gradient-to-r from-[#A7D9ED] to-[#FFEDBF]">
+                <Footer />
+              </footer>
             </div>
-            {/* Conteúdo principal (AboutMe, Skills, Projects) */}
-            <main className="w-full">
-              {children}
-            </main>
-            {/* Divisor SVG ondulado entre conteúdo principal e footer */}
-            <div className="w-full overflow-hidden -mt-1">
-              <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-                <path className="ondulacao-detalhe" d="M0,60 C480,0 960,60 1440,0 L1440,60 L0,60 Z" />
-              </svg>
-            </div>
-            <footer className="w-full bg-gradient-to-r from-[#A7D9ED] to-[#FFEDBF]">
-              <Footer />
-            </footer>
+
+            <div id="modal-root"></div>
           </I18nProvider>
         </ThemeProvider>
       </body>

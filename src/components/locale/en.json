@@ -132,6 +132,14 @@
     "contact": {
       "viewResume": "View Resume",
       "downloadResume": "Download Resume"
-    }
+    },
+    "resumeCard": {
+      "title": "Resumes",
+      "status": "Available for new opportunities",
+      "viewPT": "View (PT)",
+      "viewEN": "View (EN)",
+      "downloadPT": "Download (PT)",
+      "downloadEN": "Download (EN)"
+  }
   }
 }
