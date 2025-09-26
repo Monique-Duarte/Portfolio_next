@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslation } from 'react-i18next';
-import { FaEye, FaDownload, FaFilePdf } from 'react-icons/fa';
+import { FaEye, FaDownload } from 'react-icons/fa';
 
 const ResumeCard = () => {
   const { t } = useTranslation();
