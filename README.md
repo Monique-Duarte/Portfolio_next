@@ -60,7 +60,7 @@ src/
     page.tsx
   public/
     images/
-    favicon.svg
+    favicon.ico
     curriculo-pt.pdf
     curriculo-en.pdf
 ```

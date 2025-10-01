@@ -20,7 +20,7 @@ export const metadata = {
     siteName: 'Monique Duarte | Portfólio',
     images: [
       {
-        url: '/images/favicon.svg',
+        url: '/images/favicon.ico',
         width: 800,
         height: 600,
         alt: 'Monique Duarte',
@@ -33,7 +33,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Monique Duarte | Portfólio',
     description: 'Portfólio moderno de Monique Duarte, desenvolvedora apaixonada por tecnologia, automação, IA e inovação.',
-    images: ['/images/favicon.svg'],
+    images: ['/images/favicon.ico'],
     creator: '@seu_twitter',
   },
   alternates: {
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-br" suppressHydrationWarning style={{ overflow: 'visible' }}>
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="icon" href="/favicon.ico" type="image/ico+xml" />
       </head>
       <body className={`font-comfortaa min-h-screen overflow-visible`}>
         <BackgroundLines />
