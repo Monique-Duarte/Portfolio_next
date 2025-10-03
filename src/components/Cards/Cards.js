@@ -63,7 +63,7 @@ const projectsData = [
     altKey: "projects.portfolioAlt",
     tags: "React, Tailwind, TypeScript, i18n",
     techs: ["react", "tailwind", "ts", "i18n"],
-    featured: true,
+    featured: false,
     id: "portfolio",
     siteLink: "https://portfolio-moniquead.vercel.app/",
     githubLink: "https://github.com/Monique-Duarte/Portfolio_2025.git",
